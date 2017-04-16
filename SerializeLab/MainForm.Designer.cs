@@ -37,6 +37,7 @@
             this.ButtonDelete = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.CheckedListBoxAutosToAdd = new System.Windows.Forms.CheckedListBox();
+            this.PanelFormEditor = new System.Windows.Forms.Panel();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +90,7 @@
             this.ButtonAdd.TabIndex = 3;
             this.ButtonAdd.Text = "Add";
             this.ButtonAdd.UseVisualStyleBackColor = true;
+            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
             // 
             // ButtonDelete
             // 
@@ -103,7 +105,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 23);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(485, 242);
+            this.richTextBox1.Size = new System.Drawing.Size(221, 242);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             // 
@@ -125,11 +127,20 @@
             this.CheckedListBoxAutosToAdd.Click += new System.EventHandler(this.CheckedListBoxAutosToAdd_Click);
             this.CheckedListBoxAutosToAdd.SelectedIndexChanged += new System.EventHandler(this.CheckedListBoxAutosToAdd_SelectedIndexChanged);
             // 
+            // PanelFormEditor
+            // 
+            this.PanelFormEditor.AutoScroll = true;
+            this.PanelFormEditor.Location = new System.Drawing.Point(255, 23);
+            this.PanelFormEditor.Name = "PanelFormEditor";
+            this.PanelFormEditor.Size = new System.Drawing.Size(230, 269);
+            this.PanelFormEditor.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 424);
+            this.Controls.Add(this.PanelFormEditor);
             this.Controls.Add(this.CheckedListBoxAutosToAdd);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.ButtonDelete);
@@ -157,6 +168,7 @@
         private System.Windows.Forms.Button ButtonDelete;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.CheckedListBox CheckedListBoxAutosToAdd;
+        private System.Windows.Forms.Panel PanelFormEditor;
     }
 }
 

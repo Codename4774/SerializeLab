@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace SerializeLab.FactoryEditorFrom
+namespace SerializeLab.FactoryFormEditor
 {
-    abstract class FactoryCarEditorForm : FactoryAutoEditorForm
+    abstract class FactoryCarFormEditor : FactoryAutoFormEditor
     {
         public override FormEditor GetFormEditor()
         {

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SerializeLab.Classes;
 
+using SerializeLab.FactoryFormEditor;
+
 namespace SerializeLab
 {
     public partial class MainForm : Form
@@ -18,6 +20,8 @@ namespace SerializeLab
         {
             InitializeComponent();
         }
+
+        private static FactoryFormEditorList factoryFormEditor = new FactoryFormEditorList();
 
         private void serializeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -39,9 +43,18 @@ namespace SerializeLab
             if (CheckedListBoxAutosToAdd.CheckedItems.Count > 1)
             {
                 for (int i = 0; i < CheckedListBoxAutosToAdd.Items.Count; i++)
+                {
                     CheckedListBoxAutosToAdd.SetItemChecked(i, false);
-                CheckedListBoxAutosToAdd.SetItemChecked(CheckedListBoxAutosToAdd.SelectedIndex, true);
+                }
+                CheckedListBoxAutosToAdd.SetItemCheckState(CheckedListBoxAutosToAdd.SelectedIndex, CheckState.Checked);
             }
+        }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            FormEditor formForEdit = factoryFormEditor.FactoryList[CheckedListBoxAutosToAdd.SelectedIndex].GetFormEditor();
+            formForEdit.Show();
+            
         }
     }
 }

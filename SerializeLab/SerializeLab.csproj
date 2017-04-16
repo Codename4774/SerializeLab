@@ -54,9 +54,17 @@
     <Compile Include="Classes\TransportAuto.cs" />
     <Compile Include="Classes\TransportAutoClasses\Bus.cs" />
     <Compile Include="Classes\TransportAutoClasses\TrolleyBus.cs" />
-    <Compile Include="FactoryEditorFrom\FactoryCarEditorForm.cs" />
-    <Compile Include="FactoryEditorFrom\FactoryAutoEditorForm.cs" />
-    <Compile Include="FactoryEditorFrom\FactoryEditorFormCar\FactoryCarWithClossedRoofEditorForm.cs" />
+    <Compile Include="FactoryFormEditor\FactoryCarFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryAutoFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFormEditorList.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFormEditorCar\FactoryCarWithClosedRoofFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFormEditorCar\FactoryCarWithOpenedRoofFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFormEditorFreightTransport\FactoryLorryFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFormEditorFreightTransport\FactoryTruckFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFormEditorTransportAuto\FactoryBusFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFormEditorTransportAuto\FactoryTrolleyBusFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryFreightTransportFormEditor.cs" />
+    <Compile Include="FactoryFormEditor\FactoryTransportAutoFormEditor.cs" />
     <Compile Include="FormEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +108,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

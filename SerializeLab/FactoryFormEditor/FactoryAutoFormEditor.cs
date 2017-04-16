@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace SerializeLab.FactoryEditorFrom
+namespace SerializeLab.FactoryFormEditor
 {
-    abstract class FactoryAutoEditorForm
+    public abstract class FactoryAutoFormEditor
     {
         public TextBox GetTextBox(string name, Size size, Point location, int tabIndex)
         {
@@ -16,7 +16,7 @@ namespace SerializeLab.FactoryEditorFrom
 
             result.Location = location;
             result.Name = name;
-            result.Text = name;
+            //result.Text = name;
             result.Size = size;
             result.TabIndex = tabIndex;
 
@@ -35,6 +35,21 @@ namespace SerializeLab.FactoryEditorFrom
 
             return result;
         }
+
+        public ComboBox GetComboBox(string name, Size size, Point location, int tabIndex, Type enumType)
+        {
+            ComboBox result = new ComboBox();
+
+            result.Location = location;
+            result.Name = name;
+            result.Size = size;
+            result.TabIndex = tabIndex;
+            result.Items.AddRange(Enum.GetNames(enumType));
+            result.SelectedIndex = 0;
+
+            return result;
+        }
+
         public virtual FormEditor GetFormEditor()
         {
             FormEditor result = new FormEditor();
