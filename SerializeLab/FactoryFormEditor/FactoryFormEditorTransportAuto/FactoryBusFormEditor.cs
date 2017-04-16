@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes.TransportAutoClasses;
+using SerializeLab.Classes;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 {
     class FactoryBusFormEditor : FactoryTransportAutoFormEditor
     {
-        public override FormEditor GetFormEditor()
+        public override List<Control> GetListControlsForInput(Size size)
         {
-            FormEditor result = base.GetFormEditor();
+            List<Control> result = base.GetListControlsForInput(size);
 
-            result.Controls.Add(GetLabel("KindEngine", new Size(100, 20), new Point(5, 360), 15));
-            result.Controls.Add(GetComboBox("KindEngine", new Size(100, 20), new Point(5, 385), 16, Bus.KindOfEngine.DieselEngine.GetType() ));
+            result.Add(GetLabel("KindEngine", size, new Point(5, 360), 15));
+            result.Add(GetComboBox("KindEngine", size, new Point(5, 385), 16, Bus.KindOfEngine.DieselEngine.GetType() ));
 
             return result;
+        }
+        public override Auto GetDataObject()
+        {
+            return new Bus();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using SerializeLab.Classes;
 
 namespace SerializeLab.FactoryFormEditor
 {
@@ -16,7 +17,6 @@ namespace SerializeLab.FactoryFormEditor
 
             result.Location = location;
             result.Name = name;
-            //result.Text = name;
             result.Size = size;
             result.TabIndex = tabIndex;
 
@@ -46,30 +46,33 @@ namespace SerializeLab.FactoryFormEditor
             result.TabIndex = tabIndex;
             result.Items.AddRange(Enum.GetNames(enumType));
             result.SelectedIndex = 0;
+            result.DropDownStyle = ComboBoxStyle.DropDownList;
 
             return result;
         }
 
-        public virtual FormEditor GetFormEditor()
+        public virtual List<Control> GetListControlsForInput(Size size)
         {
-            FormEditor result = new FormEditor();
+            List<Control> result = new List<Control>();
 
-            result.Controls.Add(GetLabel("Weigth", new Size(100, 20), new Point(5, 10), 1));
-            result.Controls.Add(GetTextBox("Weigth", new Size(100, 20), new Point(5, 35), 2));
-            
-            result.Controls.Add(GetLabel("Color", new Size(100, 20), new Point(5, 60), 3));
-            result.Controls.Add(GetTextBox("Color", new Size(100, 20), new Point(5, 85), 4));
+            result.Add(GetLabel("Weigth", size, new Point(5, 10), 1));
+            result.Add(GetTextBox("Weigth", size, new Point(5, 35), 2));
 
-            result.Controls.Add(GetLabel("Mark", new Size(100, 20), new Point(5, 110), 5));
-            result.Controls.Add(GetTextBox("Mark", new Size(100, 20), new Point(5, 135), 6));
+            result.Add(GetLabel("Color", size, new Point(5, 60), 3));
+            result.Add(GetTextBox("Color", size, new Point(5, 85), 4));
 
-            result.Controls.Add(GetLabel("Width", new Size(100, 20), new Point(5, 160), 7));
-            result.Controls.Add(GetTextBox("Width", new Size(100, 20), new Point(5, 185), 8));
+            result.Add(GetLabel("Mark", size, new Point(5, 110), 5));
+            result.Add(GetTextBox("Mark", size, new Point(5, 135), 6));
 
-            result.Controls.Add(GetLabel("Height", new Size(100, 20), new Point(5, 210), 9));
-            result.Controls.Add(GetTextBox("Height", new Size(100, 20), new Point(5, 235), 10));
+            result.Add(GetLabel("Width", size, new Point(5, 160), 7));
+            result.Add(GetTextBox("Width", size, new Point(5, 185), 8));
+
+            result.Add(GetLabel("Height", size, new Point(5, 210), 9));
+            result.Add(GetTextBox("Height", size, new Point(5, 235), 10));
 
             return result;
         }
+
+        public abstract Auto GetDataObject();
     }
 }

@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes.FreightTransportClasses;
-
+using SerializeLab.Classes;
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 {
     class FactoryTruckFormEditor : FactoryFreightTransportFormEditor
     {
-        public override FormEditor GetFormEditor()
+        public override List<Control> GetListControlsForInput(Size size)
         {
-            FormEditor result = base.GetFormEditor();
+            List<Control> result = base.GetListControlsForInput(size);
 
-            result.Controls.Add(GetLabel("KindTrailer", new Size(100, 20), new Point(5, 360), 15));
-            result.Controls.Add(GetComboBox("KindTrailer", new Size(100, 20), new Point(5, 385), 16, Truck.KindOfTrailer.Detachable.GetType() ));
+            result.Add(GetLabel("KindTrailer", size, new Point(5, 360), 15));
+            result.Add(GetComboBox("KindTrailer", size, new Point(5, 385), 16, Truck.KindOfTrailer.Detachable.GetType() ));
 
             return result;
+        }
+        public override Auto GetDataObject()
+        {
+            return new Truck();
         }
     }
 }

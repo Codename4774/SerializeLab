@@ -35,9 +35,8 @@
             this.ListBoxAutos = new System.Windows.Forms.ListBox();
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.ButtonDelete = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.CheckedListBoxAutosToAdd = new System.Windows.Forms.CheckedListBox();
             this.PanelFormEditor = new System.Windows.Forms.Panel();
+            this.ComboBoxInput = new System.Windows.Forms.ComboBox();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +46,7 @@
             this.fileToolStripMenuItem});
             this.MenuMain.Location = new System.Drawing.Point(0, 0);
             this.MenuMain.Name = "MenuMain";
-            this.MenuMain.Size = new System.Drawing.Size(759, 24);
+            this.MenuMain.Size = new System.Drawing.Size(522, 24);
             this.MenuMain.TabIndex = 1;
             this.MenuMain.Text = "menuStrip1";
             // 
@@ -76,15 +75,15 @@
             // ListBoxAutos
             // 
             this.ListBoxAutos.FormattingEnabled = true;
-            this.ListBoxAutos.Location = new System.Drawing.Point(503, 23);
+            this.ListBoxAutos.Location = new System.Drawing.Point(261, 27);
             this.ListBoxAutos.Name = "ListBoxAutos";
-            this.ListBoxAutos.Size = new System.Drawing.Size(244, 238);
+            this.ListBoxAutos.Size = new System.Drawing.Size(244, 329);
             this.ListBoxAutos.TabIndex = 2;
             this.ListBoxAutos.SelectedIndexChanged += new System.EventHandler(this.ListBoxAutos_SelectedIndexChanged);
             // 
             // ButtonAdd
             // 
-            this.ButtonAdd.Location = new System.Drawing.Point(503, 367);
+            this.ButtonAdd.Location = new System.Drawing.Point(12, 367);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(81, 25);
             this.ButtonAdd.TabIndex = 3;
@@ -94,55 +93,46 @@
             // 
             // ButtonDelete
             // 
-            this.ButtonDelete.Location = new System.Drawing.Point(666, 267);
+            this.ButtonDelete.Enabled = false;
+            this.ButtonDelete.Location = new System.Drawing.Point(261, 363);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(81, 25);
             this.ButtonDelete.TabIndex = 4;
             this.ButtonDelete.Text = "Delete";
             this.ButtonDelete.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // PanelFormEditor
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 23);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(221, 242);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "";
+            this.PanelFormEditor.AutoScroll = true;
+            this.PanelFormEditor.Location = new System.Drawing.Point(12, 50);
+            this.PanelFormEditor.Name = "PanelFormEditor";
+            this.PanelFormEditor.Size = new System.Drawing.Size(230, 311);
+            this.PanelFormEditor.TabIndex = 7;
             // 
-            // CheckedListBoxAutosToAdd
+            // ComboBoxInput
             // 
-            this.CheckedListBoxAutosToAdd.CheckOnClick = true;
-            this.CheckedListBoxAutosToAdd.FormattingEnabled = true;
-            this.CheckedListBoxAutosToAdd.Items.AddRange(new object[] {
+            this.ComboBoxInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxInput.FormattingEnabled = true;
+            this.ComboBoxInput.Items.AddRange(new object[] {
             "CarWithClosedRoof",
             "CarrWithOpenedRoof",
             "Lorry",
             "Truck",
             "Bus",
             "TrolleyBus"});
-            this.CheckedListBoxAutosToAdd.Location = new System.Drawing.Point(503, 267);
-            this.CheckedListBoxAutosToAdd.Name = "CheckedListBoxAutosToAdd";
-            this.CheckedListBoxAutosToAdd.Size = new System.Drawing.Size(157, 94);
-            this.CheckedListBoxAutosToAdd.TabIndex = 6;
-            this.CheckedListBoxAutosToAdd.Click += new System.EventHandler(this.CheckedListBoxAutosToAdd_Click);
-            this.CheckedListBoxAutosToAdd.SelectedIndexChanged += new System.EventHandler(this.CheckedListBoxAutosToAdd_SelectedIndexChanged);
-            // 
-            // PanelFormEditor
-            // 
-            this.PanelFormEditor.AutoScroll = true;
-            this.PanelFormEditor.Location = new System.Drawing.Point(255, 23);
-            this.PanelFormEditor.Name = "PanelFormEditor";
-            this.PanelFormEditor.Size = new System.Drawing.Size(230, 269);
-            this.PanelFormEditor.TabIndex = 7;
+            this.ComboBoxInput.Location = new System.Drawing.Point(12, 23);
+            this.ComboBoxInput.Name = "ComboBoxInput";
+            this.ComboBoxInput.Size = new System.Drawing.Size(229, 21);
+            this.ComboBoxInput.TabIndex = 8;
+            this.ComboBoxInput.SelectedIndexChanged += new System.EventHandler(this.ComboBoxInput_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 424);
+            this.ClientSize = new System.Drawing.Size(522, 400);
+            this.Controls.Add(this.ComboBoxInput);
             this.Controls.Add(this.PanelFormEditor);
-            this.Controls.Add(this.CheckedListBoxAutosToAdd);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.ListBoxAutos);
@@ -166,9 +156,8 @@
         private System.Windows.Forms.ListBox ListBoxAutos;
         private System.Windows.Forms.Button ButtonAdd;
         private System.Windows.Forms.Button ButtonDelete;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.CheckedListBox CheckedListBoxAutosToAdd;
         private System.Windows.Forms.Panel PanelFormEditor;
+        private System.Windows.Forms.ComboBox ComboBoxInput;
     }
 }
 

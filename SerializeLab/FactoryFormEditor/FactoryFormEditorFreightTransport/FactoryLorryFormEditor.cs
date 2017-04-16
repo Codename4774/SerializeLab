@@ -6,22 +6,27 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes.FreightTransportClasses;
+using SerializeLab.Classes;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 {
     class FactoryLorryFormEditor : FactoryFreightTransportFormEditor
     {
-        public override FormEditor GetFormEditor()
+        public override List<Control> GetListControlsForInput(Size size)
         {
-            FormEditor result = base.GetFormEditor();
+            List<Control> result = base.GetListControlsForInput(size);
 
-            result.Controls.Add(GetLabel("KindTrunk", new Size(100, 20), new Point(5, 360), 15));
-            result.Controls.Add(GetComboBox("KindTrunk", new Size(100, 20), new Point(5, 385), 16, Lorry.KindOfTrunk.Closed.GetType() ));
+            result.Add(GetLabel("KindTrunk", size, new Point(5, 360), 15));
+            result.Add(GetComboBox("KindTrunk", size, new Point(5, 385), 16, Lorry.KindOfTrunk.Closed.GetType() ));
 
-            result.Controls.Add(GetLabel("SystemOfTrunk", new Size(100, 20), new Point(5, 410), 17));
-            result.Controls.Add(GetComboBox("SystemOfTrunk", new Size(100, 20), new Point(5, 435), 18, Lorry.FixedOrLiftedTrunk.Fixed.GetType() ));
+            result.Add(GetLabel("SystemOfTrunk", size, new Point(5, 410), 17));
+            result.Add(GetComboBox("SystemOfTrunk", size, new Point(5, 435), 18, Lorry.FixedOrLiftedTrunk.Fixed.GetType() ));
 
             return result;
+        }
+        public override Auto GetDataObject()
+        {
+            return new Lorry();
         }
     }
 }

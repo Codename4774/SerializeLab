@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace SerializeLab.Classes.CarClasses
 {
@@ -22,6 +24,17 @@ namespace SerializeLab.Classes.CarClasses
         {
             this.SystemOpeningRoof = systemOpeningRoof;
             this.KindRoof = kindRoof;
+        }
+
+        public override void GetAttributesFromControls(Control[] controlList)
+        {
+            const int SystemOpeningRoofIndex = 7;
+            const int KindRoofIndex = 8;
+
+            base.GetAttributesFromControls(controlList);
+
+            SystemOpeningRoof = (SystemOfOpeningRoof)Enum.Parse(typeof(SystemOfOpeningRoof), controlList[SystemOpeningRoofIndex].Text);
+            KindRoof = (KindOfRoof)Enum.Parse(typeof(KindOfRoof), controlList[KindRoofIndex].Text, true);
         }
     }
 }

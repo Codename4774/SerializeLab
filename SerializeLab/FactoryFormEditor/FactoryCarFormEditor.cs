@@ -10,15 +10,15 @@ namespace SerializeLab.FactoryFormEditor
 {
     abstract class FactoryCarFormEditor : FactoryAutoFormEditor
     {
-        public override FormEditor GetFormEditor()
+        public override List<Control> GetListControlsForInput(Size size)
         {
-            FormEditor result = base.GetFormEditor();
+            List<Control> result = base.GetListControlsForInput(size);
 
-            result.Controls.Add(GetLabel("CountPlaces", new Size(100, 20), new Point(5, 260), 11));
-            result.Controls.Add(GetTextBox("CountPlaces", new Size(100, 20), new Point(5, 285), 12));
+            result.Add(GetLabel("CountPlaces", size, new Point(5, 260), 12));
+            result.Add(GetTextBox("CountPlaces", size, new Point(5, 285), 13));
 
-            result.Controls.Add(GetLabel("BagageCapacity", new Size(100, 20), new Point(5, 310), 13));
-            result.Controls.Add(GetTextBox("BagageCapacity", new Size(100, 20), new Point(5, 335), 14));
+            result.Add(GetLabel("BagageCapacity", size, new Point(5, 310), 14));
+            result.Add(GetTextBox("BagageCapacity", size, new Point(5, 335), 15));
 
             return result;
         }

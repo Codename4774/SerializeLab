@@ -6,22 +6,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes.CarClasses;
+using SerializeLab.Classes;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
 {
     class FactoryCarWithClosedRoofFormEditor : FactoryCarFormEditor
     {
-        public override FormEditor GetFormEditor()
+        public override List<Control> GetListControlsForInput(Size size)
         {
-            FormEditor result = base.GetFormEditor();
+            List<Control> result = base.GetListControlsForInput(size);
 
-            result.Controls.Add(GetLabel("KindHatch", new Size(100, 20), new Point(5, 360), 15));
-            result.Controls.Add(GetComboBox("KindHatch", new Size(100, 20), new Point(5, 385), 16, CarWithClosedRoof.KindOfHatch.Hatch.GetType()) );
+            result.Add(GetLabel("KindHatch", size, new Point(5, 360), 15));
+            result.Add(GetComboBox("KindHatch", size, new Point(5, 385), 16, CarWithClosedRoof.KindOfHatch.Hatch.GetType()));
 
-            result.Controls.Add(GetLabel("SaloonVolume", new Size(100, 20), new Point(5, 410), 17));
-            result.Controls.Add(GetTextBox("SaloonVolume", new Size(100, 20), new Point(5, 435), 18));
+            result.Add(GetLabel("SaloonVolume", size, new Point(5, 410), 17));
+            result.Add(GetTextBox("SaloonVolume", size, new Point(5, 435), 18));
 
             return result;
         }
+        public override Auto GetDataObject()
+        {
+            return new CarWithClosedRoof();
+        }
     }
+
 }
