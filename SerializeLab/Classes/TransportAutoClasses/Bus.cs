@@ -10,12 +10,12 @@ namespace SerializeLab.Classes.TransportAutoClasses
     {
         public enum KindOfEngine { GasolineEngine, DieselEngine }
         public KindOfEngine KindEngine { set; get; }
-        public Bus()
-            : base()
+        public Bus(int classIndex)
+            : base(classIndex)
         { }
-        public Bus(int weigth, string color, string mark, int height, int width, int mileage, int countSittingPlace, int countStandingPlace,
+        public Bus(int weigth, string color, string mark, int height, int width, int classIndex, int countSittingPlace, int countStandingPlace,
                    KindOfEngine kindEngine)
-            : base(weigth, color, mark, height, width, mileage, countSittingPlace, countStandingPlace)
+            : base(weigth, color, mark, height, width, classIndex, countSittingPlace, countStandingPlace)
         {
             this.KindEngine = kindEngine;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using SerializeLab.Classes;
 
 namespace SerializeLab.FactoryFormEditor
 {
@@ -21,6 +22,32 @@ namespace SerializeLab.FactoryFormEditor
             result.Add(GetTextBox("CountStandingPlace", size, new Point(5, 335), 14));
 
             return result;
+        }
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int CountSittingPlaceIndex = 5;
+            const int CountStandingPlaceIndex = 6;
+
+            Control[] controlList = GetInputControl(controls);
+
+            TransportAuto currentTransport = (TransportAuto)currentAuto;
+            currentTransport.CountSittingPlace = Convert.ToInt32(controlList[CountSittingPlaceIndex].Text);
+            currentTransport.CountStandingPlace = Convert.ToInt32(controlList[CountStandingPlaceIndex].Text);
+        }
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int CountSittingPlaceIndex = 5;
+            const int CountStandingPlaceIndex = 6;
+
+            Control[] controlList = GetInputControl(controls);
+
+            TransportAuto currentTransport = (TransportAuto)currentAuto;
+            controlList[CountSittingPlaceIndex].Text = Convert.ToString(currentTransport.CountSittingPlace);
+            controlList[CountStandingPlaceIndex].Text = Convert.ToString(currentTransport.CountStandingPlace);
         }
     }
 }

@@ -15,34 +15,17 @@ namespace SerializeLab
 {
     public partial class MainForm : Form
     {
-        private List<Auto> autoList = new List<Auto>();
-        public List<Auto> AutoList
-        { set; get; }
-
-        public Control[] GetInputControl(Control.ControlCollection controlList)
-        {
-            List<Control> result = new List<Control>();
-            Label temp = new Label();
-            Type labelType = temp.GetType();
-
-            for (int i = 0; i < controlList.Count; i++)
-            {
-                if (controlList[i].GetType() != labelType)
-                {
-                    result.Add(controlList[i]);
-                }
-            }
-            return result.ToArray();
-        }
+        private BindingList<Auto> autoList = new BindingList<Auto>();
+        public BindingList<Auto> AutoList { set; get; }
 
         public MainForm()
         {
             InitializeComponent();
             ComboBoxInput.SelectedIndex = 0;
-            PanelFormEditor.Controls.Clear();
-            PanelFormEditor.Controls.AddRange(factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
-            PanelFormEditor.Tag = factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(); 
-            AutoList = new List<Auto>();
+            PanelAdding.Controls.Clear();
+            PanelAdding.Controls.AddRange(factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
+            PanelAdding.Tag = factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(ComboBoxInput.SelectedIndex); 
+            AutoList = new BindingList<Auto>();
             ListBoxAutos.DataSource = AutoList;
             ListBoxAutos.DisplayMember = "Mark";
         }
@@ -56,24 +39,32 @@ namespace SerializeLab
 
         private void ListBoxAutos_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            Auto currentAuto = (Auto)ListBoxAutos.SelectedItem;
+            PanelEditing.Controls.Clear();
+            PanelEditing.Controls.AddRange(factoryFormEditor.FactoryList[currentAuto.ClassIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
+            factoryFormEditor.FactoryList[currentAuto.ClassIndex].AddAttribsToControls(currentAuto, PanelEditing.Controls);
+            PanelEditing.Tag = currentAuto;
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            Auto temp = (Auto)PanelFormEditor.Tag;
-            temp.GetAttributesFromControls(GetInputControl(PanelFormEditor.Controls));
+            Auto temp = (Auto)PanelAdding.Tag;
+            factoryFormEditor.FactoryList[temp.ClassIndex].GetAttribsFromControls(temp, PanelAdding.Controls);
+            PanelAdding.Tag = factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(ComboBoxInput.SelectedIndex);
             AutoList.Add(temp);
-            ListBoxAutos.DataSource = AutoList;
-            ListBoxAutos.DisplayMember = "Mark";
-            ListBoxAutos.SelectedValueChanged += new EventHandler(ListBoxAutos_SelectedIndexChanged);
-
         }
         private void ComboBoxInput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PanelFormEditor.Controls.Clear();
-            PanelFormEditor.Controls.AddRange(factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
-            PanelFormEditor.Tag = factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject();       
+            PanelAdding.Controls.Clear();
+            PanelAdding.Controls.AddRange(factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
+            PanelAdding.Tag = factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(ComboBoxInput.SelectedIndex);       
+        }
+
+        private void ButtonSubmitEdit_Click(object sender, EventArgs e)
+        {
+            Auto temp = (Auto)PanelEditing.Tag;
+            factoryFormEditor.FactoryList[temp.ClassIndex].GetAttribsFromControls(temp, PanelEditing.Controls);
+            AutoList.ResetBindings();
         }
     }
 }

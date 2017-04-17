@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using SerializeLab.Classes;
 
 namespace SerializeLab.FactoryFormEditor
 {
@@ -21,6 +22,31 @@ namespace SerializeLab.FactoryFormEditor
             result.Add(GetTextBox("BagageCapacity", size, new Point(5, 335), 15));
 
             return result;
+        }
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int CountPlacesIndex = 5;
+            const int BagageCapacityIndex = 6;
+
+            Control[] controlList = GetInputControl(controls);
+
+            Car currentCar = (Car)currentAuto;
+            currentCar.CountPlaces = Convert.ToInt32(controlList[CountPlacesIndex].Text);
+            currentCar.BagageCapacity = Convert.ToInt32(controlList[BagageCapacityIndex].Text);
+        }
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int CountPlacesIndex = 5;
+            const int BagageCapacityIndex = 6;
+
+            Control[] controlList = GetInputControl(controls);
+            Car currentCar = (Car)currentAuto;
+            controlList[CountPlacesIndex].Text = Convert.ToString(currentCar.CountPlaces);
+            controlList[BagageCapacityIndex].Text = Convert.ToString(currentCar.BagageCapacity);
         }
     }
 }

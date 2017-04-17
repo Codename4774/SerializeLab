@@ -20,9 +20,31 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 
             return result;
         }
-        public override Auto GetDataObject()
+        public override Auto GetDataObject(int classIndex)
         {
-            return new Truck();
+            return new Truck(classIndex);
+        }
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int KindTrailerIndex = 7;
+
+            Control[] controlList = GetInputControl(controls);
+
+            Truck currentTransport = (Truck)currentAuto;
+            currentTransport.KindTrailer = (Truck.KindOfTrailer)Enum.Parse(typeof(Truck.KindOfTrailer), controlList[KindTrailerIndex].Text);
+        }
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int KindTrailerIndex = 7;
+
+            Control[] controlList = GetInputControl(controls);
+
+            Truck currentTransport = (Truck)currentAuto;
+            controlList[KindTrailerIndex].Text = Enum.GetName(typeof(Truck.KindOfTrailer), currentTransport.KindTrailer);
         }
     }
 }

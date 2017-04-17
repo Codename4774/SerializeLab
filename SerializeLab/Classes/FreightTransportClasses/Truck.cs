@@ -10,12 +10,12 @@ namespace SerializeLab.Classes.FreightTransportClasses
     {
         public enum KindOfTrailer { Integrated, Detachable };
         public KindOfTrailer KindTrailer { get; set; }
-        public Truck()
-            : base()
+        public Truck(int classIndex)
+            : base(classIndex)
         { }
-        public Truck(int weigth, string color, string mark, int height, int width, int mileage, int maximumTransporedCargo, int countAxles,
+        public Truck(int weigth, string color, string mark, int height, int width, int classIndex, int maximumTransporedCargo, int countAxles,
                      KindOfTrailer kindTrailer)
-            : base(weigth, color, mark, height, width, mileage, maximumTransporedCargo, countAxles)
+            : base(weigth, color, mark, height, width, classIndex, maximumTransporedCargo, countAxles)
         {
             this.KindTrailer = kindTrailer;
         }

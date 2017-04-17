@@ -24,9 +24,36 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 
             return result;
         }
-        public override Auto GetDataObject()
+        public override Auto GetDataObject(int classIndex)
         {
-            return new Lorry();
+            return new Lorry(classIndex);
+        }
+
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int KindTrunkIndex = 7;
+            const int SystemOfTrunkIndex = 8;
+
+            Control[] controlList = GetInputControl(controls);
+
+            Lorry currentTransport = (Lorry)currentAuto;
+            currentTransport.KindTrunk = (Lorry.KindOfTrunk)Enum.Parse(typeof(Lorry.KindOfTrunk), controlList[KindTrunkIndex].Text);
+            currentTransport.SystemOfTrunk = (Lorry.FixedOrLiftedTrunk)Enum.Parse(typeof(Lorry.FixedOrLiftedTrunk), controlList[SystemOfTrunkIndex].Text);
+        }
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int KindTrunkIndex = 7;
+            const int SystemOfTrunkIndex = 8;
+
+            Control[] controlList = GetInputControl(controls);
+
+            Lorry currentTransport = (Lorry)currentAuto;
+            controlList[KindTrunkIndex].Text = Enum.GetName(typeof(Lorry.KindOfTrunk), currentTransport.KindTrunk);
+            controlList[SystemOfTrunkIndex].Text = Enum.GetName(typeof(Lorry.FixedOrLiftedTrunk), currentTransport.SystemOfTrunk);
         }
     }
 }

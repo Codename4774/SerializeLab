@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using SerializeLab.Classes;
 
 namespace SerializeLab.FactoryFormEditor
 {
@@ -21,6 +22,32 @@ namespace SerializeLab.FactoryFormEditor
             result.Add(GetTextBox("CountAxles", size, new Point(5, 335), 14));
 
             return result;
+        }
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int MaximumTransporedCargoIndex = 5;
+            const int CountAxlesIndex = 6;
+
+            Control[] controlList = GetInputControl(controls);
+
+            FreightTransport currentTransport = (FreightTransport)currentAuto;
+            currentTransport.MaximumTransporedCargo = Convert.ToInt32(controlList[MaximumTransporedCargoIndex].Text);
+            currentTransport.CountAxles = Convert.ToInt32(controlList[CountAxlesIndex].Text);
+        }
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int MaximumTransporedCargoIndex = 5;
+            const int CountAxlesIndex = 6;
+
+            Control[] controlList = GetInputControl(controls);
+
+            FreightTransport currentTransport = (FreightTransport)currentAuto;
+            controlList[MaximumTransporedCargoIndex].Text = Convert.ToString(currentTransport.MaximumTransporedCargo);
+            controlList[CountAxlesIndex].Text = Convert.ToString(currentTransport.CountAxles);
         }
     }
 }

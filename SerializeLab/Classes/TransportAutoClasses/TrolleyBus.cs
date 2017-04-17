@@ -9,12 +9,12 @@ namespace SerializeLab.Classes.TransportAutoClasses
     class TrolleyBus : TransportAuto
     {
         public int LengthOfRods { set; get; }
-        public TrolleyBus()
-            : base()
+        public TrolleyBus(int classIndex)
+            : base(classIndex)
         { }
-        public TrolleyBus(int weigth, string color, string mark, int height, int width, int mileage, int countSittingPlace, int countStandingPlace,
+        public TrolleyBus(int weigth, string color, string mark, int height, int width, int classIndex, int countSittingPlace, int countStandingPlace,
                    int lengthOfRods)
-            : base(weigth, color, mark, height, width, mileage, countSittingPlace, countStandingPlace)
+            : base(weigth, color, mark, height, width, classIndex, countSittingPlace, countStandingPlace)
         {
             this.LengthOfRods = lengthOfRods;
         }

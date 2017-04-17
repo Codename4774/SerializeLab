@@ -21,9 +21,33 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 
             return result;
         }
-        public override Auto GetDataObject()
+        public override Auto GetDataObject(int classIndex)
         {
-            return new TrolleyBus();
+            return new TrolleyBus(classIndex);
+        }
+
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int LengthOfRodsIndex = 7;
+
+
+            Control[] controlList = GetInputControl(controls);
+
+            TrolleyBus currentTransport = (TrolleyBus)currentAuto;
+            currentTransport.LengthOfRods = Convert.ToInt32(controlList[LengthOfRodsIndex].Text);
+        }
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int LengthOfRodsIndex = 7;
+
+            Control[] controlList = GetInputControl(controls);
+
+            TrolleyBus currentTransport = (TrolleyBus)currentAuto;
+            controlList[LengthOfRodsIndex].Text = Convert.ToString(currentTransport.LengthOfRods);
         }
     }
 }

@@ -17,31 +17,26 @@ namespace SerializeLab.Classes
         public int Height { get; set;}
         public int Width { get; set; }
 
-        public Auto()
-        { }
-        public Auto(int weigth, string color, string mark, int height, int width, int mileage)
+        private int classIndex;
+
+        public int ClassIndex
+        {
+            get
+            {
+                return classIndex;
+            }
+        }
+        public Auto(int classIndex)
+        {
+            this.classIndex = classIndex;
+        }
+        public Auto(int weigth, string color, string mark, int height, int width, int classIndex)
         {
             this.Weigth = weigth;
             this.Color = color;
             this.Mark = mark;
             this.Width = width;
+            this.classIndex = classIndex;
         }
-
-        public virtual void GetAttributesFromControls(Control[] controlList)
-        {
-            const int WeightIndex = 0;
-            const int ColorIndex = 1;
-            const int MarkIndex = 2;
-            const int HeightIndex = 3;
-            const int WidthIndex = 4;
-            
-            
-            Weigth = Convert.ToInt32(controlList[WeightIndex].Text);
-            Color = controlList[ColorIndex].Text;
-            Mark = controlList[MarkIndex].Text;
-            Height = Convert.ToInt32(controlList[HeightIndex].Text);
-            Width = Convert.ToInt32(controlList[WidthIndex].Text);
-        }
-
     }
 }

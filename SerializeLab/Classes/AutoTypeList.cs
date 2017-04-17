@@ -27,12 +27,12 @@ namespace SerializeLab.Classes
         public AutoTypeList()
         {
             autoList = new List<Auto>();
-            autoList.Add(new CarWithClosedRoof());
-            autoList.Add(new CarWithOpenRoof());
-            autoList.Add(new Lorry());
-            autoList.Add(new Truck());
-            autoList.Add(new Bus());
-            autoList.Add(new TrolleyBus());
+            autoList.Add(new CarWithClosedRoof(0));
+            autoList.Add(new CarWithOpenRoof(1));
+            autoList.Add(new Lorry(2));
+            autoList.Add(new Truck(3));
+            autoList.Add(new Bus(4));
+            autoList.Add(new TrolleyBus(5));
         }
     }
 }

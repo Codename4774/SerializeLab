@@ -24,9 +24,36 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
 
             return result;
         }
-        public override Auto GetDataObject()
+        public override Auto GetDataObject(int classIndex)
         {
-            return new CarWithClosedRoof();
+            return new CarWithClosedRoof(classIndex);
+        }
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int KindHatchIndex = 7;
+            const int SaloonVolumeIndex = 8;
+
+            Control[] controlList = GetInputControl(controls);
+
+            CarWithClosedRoof currentCar = (CarWithClosedRoof)currentAuto;
+            currentCar.KindHatch = (CarWithClosedRoof.KindOfHatch)Enum.Parse(typeof(CarWithClosedRoof.KindOfHatch), controlList[KindHatchIndex].Text);
+            currentCar.SaloonVolume = Convert.ToInt32(controlList[SaloonVolumeIndex].Text);
+        }
+
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int KindHatchIndex = 7;
+            const int SaloonVolumeIndex = 8;
+
+            Control[] controlList = GetInputControl(controls);
+
+            CarWithClosedRoof currentCar = (CarWithClosedRoof)currentAuto;
+            controlList[KindHatchIndex].Text = Enum.GetName(typeof(CarWithClosedRoof.KindOfHatch), currentCar.KindHatch);
+            controlList[SaloonVolumeIndex].Text = Convert.ToString(currentCar.SaloonVolume);
         }
     }
 

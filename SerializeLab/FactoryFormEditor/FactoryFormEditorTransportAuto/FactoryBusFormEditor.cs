@@ -21,9 +21,33 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 
             return result;
         }
-        public override Auto GetDataObject()
+        public override Auto GetDataObject(int classIndex)
         {
-            return new Bus();
+            return new Bus(classIndex);
+        }
+
+        public override void GetAttribsFromControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.GetAttribsFromControls(currentAuto, controls);
+
+            const int KindEngineIndex = 7;
+
+
+            Control[] controlList = GetInputControl(controls);
+
+            Bus currentTransport = (Bus)currentAuto;
+            currentTransport.KindEngine = (Bus.KindOfEngine)Enum.Parse(typeof(Bus.KindOfEngine), controlList[KindEngineIndex].Text);
+        }
+        public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
+        {
+            base.AddAttribsToControls(currentAuto, controls);
+
+            const int KindEngineIndex = 7;
+
+            Control[] controlList = GetInputControl(controls);
+
+            Bus currentTransport = (Bus)currentAuto;
+            controlList[KindEngineIndex].Text = Enum.GetName(typeof(Bus.KindOfEngine), currentTransport.KindEngine);
         }
     }
 }

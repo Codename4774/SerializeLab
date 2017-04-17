@@ -35,8 +35,10 @@
             this.ListBoxAutos = new System.Windows.Forms.ListBox();
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.ButtonDelete = new System.Windows.Forms.Button();
-            this.PanelFormEditor = new System.Windows.Forms.Panel();
+            this.PanelAdding = new System.Windows.Forms.Panel();
             this.ComboBoxInput = new System.Windows.Forms.ComboBox();
+            this.PanelEditing = new System.Windows.Forms.Panel();
+            this.ButtonSubmitEdit = new System.Windows.Forms.Button();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +48,7 @@
             this.fileToolStripMenuItem});
             this.MenuMain.Location = new System.Drawing.Point(0, 0);
             this.MenuMain.Name = "MenuMain";
-            this.MenuMain.Size = new System.Drawing.Size(522, 24);
+            this.MenuMain.Size = new System.Drawing.Size(748, 24);
             this.MenuMain.TabIndex = 1;
             this.MenuMain.Text = "menuStrip1";
             // 
@@ -75,7 +77,7 @@
             // ListBoxAutos
             // 
             this.ListBoxAutos.FormattingEnabled = true;
-            this.ListBoxAutos.Location = new System.Drawing.Point(261, 27);
+            this.ListBoxAutos.Location = new System.Drawing.Point(494, 32);
             this.ListBoxAutos.Name = "ListBoxAutos";
             this.ListBoxAutos.Size = new System.Drawing.Size(244, 329);
             this.ListBoxAutos.TabIndex = 2;
@@ -94,20 +96,20 @@
             // ButtonDelete
             // 
             this.ButtonDelete.Enabled = false;
-            this.ButtonDelete.Location = new System.Drawing.Point(261, 363);
+            this.ButtonDelete.Location = new System.Drawing.Point(494, 368);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(81, 25);
             this.ButtonDelete.TabIndex = 4;
             this.ButtonDelete.Text = "Delete";
             this.ButtonDelete.UseVisualStyleBackColor = true;
             // 
-            // PanelFormEditor
+            // PanelAdding
             // 
-            this.PanelFormEditor.AutoScroll = true;
-            this.PanelFormEditor.Location = new System.Drawing.Point(12, 50);
-            this.PanelFormEditor.Name = "PanelFormEditor";
-            this.PanelFormEditor.Size = new System.Drawing.Size(230, 311);
-            this.PanelFormEditor.TabIndex = 7;
+            this.PanelAdding.AutoScroll = true;
+            this.PanelAdding.Location = new System.Drawing.Point(12, 54);
+            this.PanelAdding.Name = "PanelAdding";
+            this.PanelAdding.Size = new System.Drawing.Size(230, 307);
+            this.PanelAdding.TabIndex = 7;
             // 
             // ComboBoxInput
             // 
@@ -120,19 +122,39 @@
             "Truck",
             "Bus",
             "TrolleyBus"});
-            this.ComboBoxInput.Location = new System.Drawing.Point(12, 23);
+            this.ComboBoxInput.Location = new System.Drawing.Point(12, 32);
             this.ComboBoxInput.Name = "ComboBoxInput";
             this.ComboBoxInput.Size = new System.Drawing.Size(229, 21);
             this.ComboBoxInput.TabIndex = 8;
             this.ComboBoxInput.SelectedIndexChanged += new System.EventHandler(this.ComboBoxInput_SelectedIndexChanged);
             // 
+            // PanelEditing
+            // 
+            this.PanelEditing.AutoScroll = true;
+            this.PanelEditing.Location = new System.Drawing.Point(248, 32);
+            this.PanelEditing.Name = "PanelEditing";
+            this.PanelEditing.Size = new System.Drawing.Size(240, 329);
+            this.PanelEditing.TabIndex = 9;
+            // 
+            // ButtonSubmitEdit
+            // 
+            this.ButtonSubmitEdit.Location = new System.Drawing.Point(248, 368);
+            this.ButtonSubmitEdit.Name = "ButtonSubmitEdit";
+            this.ButtonSubmitEdit.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSubmitEdit.TabIndex = 10;
+            this.ButtonSubmitEdit.Text = "SubmitEdit";
+            this.ButtonSubmitEdit.UseVisualStyleBackColor = true;
+            this.ButtonSubmitEdit.Click += new System.EventHandler(this.ButtonSubmitEdit_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(522, 400);
+            this.ClientSize = new System.Drawing.Size(748, 400);
+            this.Controls.Add(this.ButtonSubmitEdit);
+            this.Controls.Add(this.PanelEditing);
             this.Controls.Add(this.ComboBoxInput);
-            this.Controls.Add(this.PanelFormEditor);
+            this.Controls.Add(this.PanelAdding);
             this.Controls.Add(this.ButtonDelete);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.ListBoxAutos);
@@ -156,8 +178,10 @@
         private System.Windows.Forms.ListBox ListBoxAutos;
         private System.Windows.Forms.Button ButtonAdd;
         private System.Windows.Forms.Button ButtonDelete;
-        private System.Windows.Forms.Panel PanelFormEditor;
+        private System.Windows.Forms.Panel PanelAdding;
         private System.Windows.Forms.ComboBox ComboBoxInput;
+        private System.Windows.Forms.Panel PanelEditing;
+        private System.Windows.Forms.Button ButtonSubmitEdit;
     }
 }
 
