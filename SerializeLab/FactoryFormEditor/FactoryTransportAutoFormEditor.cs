@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes;
+using System.IO;
 
 namespace SerializeLab.FactoryFormEditor
 {
@@ -16,10 +17,10 @@ namespace SerializeLab.FactoryFormEditor
             List<Control> result = base.GetListControlsForInput(size);
 
             result.Add(GetLabel("CountSittingPlace", size, new Point(5, 260), 11));
-            result.Add(GetTextBox("CountSittingPlace", size, new Point(5, 285), 12));
+            result.Add(GetTextBox("CountSittingPlace", size, new Point(5, 285), 12, TextBoxNumb_KeyPress));
 
             result.Add(GetLabel("CountStandingPlace", size, new Point(5, 310), 13));
-            result.Add(GetTextBox("CountStandingPlace", size, new Point(5, 335), 14));
+            result.Add(GetTextBox("CountStandingPlace", size, new Point(5, 335), 14, TextBoxNumb_KeyPress));
 
             return result;
         }
@@ -31,11 +32,19 @@ namespace SerializeLab.FactoryFormEditor
             const int CountStandingPlaceIndex = 6;
 
             Control[] controlList = GetInputControl(controls);
-
-            TransportAuto currentTransport = (TransportAuto)currentAuto;
-            currentTransport.CountSittingPlace = Convert.ToInt32(controlList[CountSittingPlaceIndex].Text);
-            currentTransport.CountStandingPlace = Convert.ToInt32(controlList[CountStandingPlaceIndex].Text);
+            try
+            {
+                TransportAuto currentTransport = (TransportAuto)currentAuto;
+                currentTransport.CountSittingPlace = Convert.ToInt32(controlList[CountSittingPlaceIndex].Text);
+                currentTransport.CountStandingPlace = Convert.ToInt32(controlList[CountStandingPlaceIndex].Text);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
+
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
         {
             base.AddAttribsToControls(currentAuto, controls);
@@ -48,6 +57,38 @@ namespace SerializeLab.FactoryFormEditor
             TransportAuto currentTransport = (TransportAuto)currentAuto;
             controlList[CountSittingPlaceIndex].Text = Convert.ToString(currentTransport.CountSittingPlace);
             controlList[CountStandingPlaceIndex].Text = Convert.ToString(currentTransport.CountStandingPlace);
+        }
+
+        public override void SerializeObject(StreamWriter file, Auto currentAuto)
+        {
+            base.SerializeObject(file, currentAuto);
+
+            TransportAuto currentTransport = (TransportAuto)currentAuto;
+            file.Write(currentTransport.CountSittingPlace);
+            file.Write(Separator);
+            file.Write(currentTransport.CountStandingPlace);
+            file.Write(Separator);
+        }
+
+        public override void DeserializeObject(List<string> data, Auto currentAuto)
+        {
+            base.DeserializeObject(data, currentAuto);
+
+            const int currentItemList = 0;
+
+            try
+            {
+                TransportAuto currentTransport = (TransportAuto)currentAuto;
+                currentTransport.CountSittingPlace = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                currentTransport.CountStandingPlace = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
     }
 }

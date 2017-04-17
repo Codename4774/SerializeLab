@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes.CarClasses;
 using SerializeLab.Classes;
+using System.IO;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
 {
@@ -36,10 +37,17 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             const int KindRoofIndex = 8;
 
             Control[] controlList = GetInputControl(controls);
-
-            CarWithOpenRoof currentCar = (CarWithOpenRoof)currentAuto;
-            currentCar.SystemOpeningRoof = (CarWithOpenRoof.SystemOfOpeningRoof)Enum.Parse(typeof(CarWithOpenRoof.SystemOfOpeningRoof), controlList[SystemOpeningRoofIndex].Text);
-            currentCar.KindRoof = (CarWithOpenRoof.KindOfRoof)Enum.Parse(typeof(CarWithOpenRoof.KindOfRoof), controlList[KindRoofIndex].Text, true);
+            try
+            {
+                CarWithOpenRoof currentCar = (CarWithOpenRoof)currentAuto;
+                currentCar.SystemOpeningRoof = (CarWithOpenRoof.SystemOfOpeningRoof)Enum.Parse(typeof(CarWithOpenRoof.SystemOfOpeningRoof), controlList[SystemOpeningRoofIndex].Text);
+                currentCar.KindRoof = (CarWithOpenRoof.KindOfRoof)Enum.Parse(typeof(CarWithOpenRoof.KindOfRoof), controlList[KindRoofIndex].Text, true);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }        
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
         {
@@ -53,6 +61,37 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             CarWithOpenRoof currentCar = (CarWithOpenRoof)currentAuto;
             controlList[SystemOpeningRoofIndex].Text = Enum.GetName(typeof(CarWithOpenRoof.SystemOfOpeningRoof), currentCar.SystemOpeningRoof);
             controlList[KindRoofIndex].Text = Enum.GetName(typeof(CarWithOpenRoof.KindOfRoof), currentCar.KindRoof);
+        }
+        public override void SerializeObject(StreamWriter file, Auto currentAuto)
+        {
+            base.SerializeObject(file, currentAuto);
+
+            CarWithOpenRoof currentCar = (CarWithOpenRoof)currentAuto;
+            file.Write(currentCar.SystemOpeningRoof);
+            file.Write(Separator);
+            file.Write(currentCar.KindRoof);
+            file.Write(Separator);
+        }
+        public override void DeserializeObject(List<string> data, Auto currentAuto)
+        {
+
+            base.DeserializeObject(data, currentAuto);
+
+            const int currentItemList = 0;
+
+            try
+            {
+                CarWithOpenRoof currentCar = (CarWithOpenRoof)currentAuto;
+                currentCar.SystemOpeningRoof = (CarWithOpenRoof.SystemOfOpeningRoof)Enum.Parse(typeof(CarWithOpenRoof.SystemOfOpeningRoof), data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                currentCar.KindRoof = (CarWithOpenRoof.KindOfRoof)Enum.Parse(typeof(CarWithOpenRoof.KindOfRoof), data[currentItemList], true); 
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
     }
 }

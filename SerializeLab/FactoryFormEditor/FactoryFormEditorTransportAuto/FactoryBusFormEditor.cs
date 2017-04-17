@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes.TransportAutoClasses;
 using SerializeLab.Classes;
+using System.IO;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 {
@@ -34,9 +35,16 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 
 
             Control[] controlList = GetInputControl(controls);
-
-            Bus currentTransport = (Bus)currentAuto;
-            currentTransport.KindEngine = (Bus.KindOfEngine)Enum.Parse(typeof(Bus.KindOfEngine), controlList[KindEngineIndex].Text);
+            try
+            {
+                Bus currentTransport = (Bus)currentAuto;
+                currentTransport.KindEngine = (Bus.KindOfEngine)Enum.Parse(typeof(Bus.KindOfEngine), controlList[KindEngineIndex].Text);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
         {
@@ -48,6 +56,34 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 
             Bus currentTransport = (Bus)currentAuto;
             controlList[KindEngineIndex].Text = Enum.GetName(typeof(Bus.KindOfEngine), currentTransport.KindEngine);
+        }
+
+        public override void SerializeObject(StreamWriter file, Auto currentAuto)
+        {
+            base.SerializeObject(file, currentAuto);
+
+            Bus currentTransport = (Bus)currentAuto;
+            file.Write(currentTransport.KindEngine);
+            file.Write(Separator);
+        }
+
+        public override void DeserializeObject(List<string> data, Auto currentAuto)
+        {
+            base.DeserializeObject(data, currentAuto);
+
+            const int currentItemList = 0;
+
+            try
+            {
+                Bus currentTransport = (Bus)currentAuto;
+                currentTransport.KindEngine = (Bus.KindOfEngine)Enum.Parse(typeof(Bus.KindOfEngine), data[currentItemList]);
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
     }
 }

@@ -39,6 +39,7 @@
             this.ComboBoxInput = new System.Windows.Forms.ComboBox();
             this.PanelEditing = new System.Windows.Forms.Panel();
             this.ButtonSubmitEdit = new System.Windows.Forms.Button();
+            this.OpenSerializefileDialog = new System.Windows.Forms.OpenFileDialog();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,15 +65,16 @@
             // serializeToolStripMenuItem
             // 
             this.serializeToolStripMenuItem.Name = "serializeToolStripMenuItem";
-            this.serializeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.serializeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.serializeToolStripMenuItem.Text = "Serialize";
             this.serializeToolStripMenuItem.Click += new System.EventHandler(this.serializeToolStripMenuItem_Click);
             // 
             // deserializeToolStripMenuItem
             // 
             this.deserializeToolStripMenuItem.Name = "deserializeToolStripMenuItem";
-            this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deserializeToolStripMenuItem.Text = "Deserialize";
+            this.deserializeToolStripMenuItem.Click += new System.EventHandler(this.deserializeToolStripMenuItem_Click);
             // 
             // ListBoxAutos
             // 
@@ -95,13 +97,13 @@
             // 
             // ButtonDelete
             // 
-            this.ButtonDelete.Enabled = false;
             this.ButtonDelete.Location = new System.Drawing.Point(494, 368);
             this.ButtonDelete.Name = "ButtonDelete";
             this.ButtonDelete.Size = new System.Drawing.Size(81, 25);
             this.ButtonDelete.TabIndex = 4;
             this.ButtonDelete.Text = "Delete";
             this.ButtonDelete.UseVisualStyleBackColor = true;
+            this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // PanelAdding
             // 
@@ -182,6 +184,7 @@
         private System.Windows.Forms.ComboBox ComboBoxInput;
         private System.Windows.Forms.Panel PanelEditing;
         private System.Windows.Forms.Button ButtonSubmitEdit;
+        private System.Windows.Forms.OpenFileDialog OpenSerializefileDialog;
     }
 }
 

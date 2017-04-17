@@ -48,7 +48,6 @@
     <Compile Include="Classes\Car.cs" />
     <Compile Include="Classes\CarClasses\CarWithClosedRoof.cs" />
     <Compile Include="Classes\CarClasses\CarWithOpenRoof.cs" />
-    <Compile Include="Classes\AutoTypeList.cs" />
     <Compile Include="Classes\FreightTransport.cs" />
     <Compile Include="Classes\FreightTransportClasses\Lorry.cs" />
     <Compile Include="Classes\FreightTransportClasses\Truck.cs" />

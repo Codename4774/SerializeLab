@@ -6,12 +6,34 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes;
+using System.IO;
 
 namespace SerializeLab.FactoryFormEditor
 {
     public abstract class FactoryAutoFormEditor
     {
-        public TextBox GetTextBox(string name, Size size, Point location, int tabIndex)
+
+        public void TextBoxText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            const int backSpaceCode = 8;
+
+            if (!Char.IsLetterOrDigit(e.KeyChar) && (e.KeyChar != backSpaceCode) && (e.KeyChar != ' '))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public void TextBoxNumb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            const int backSpaceCode = 8;
+
+            if (!Char.IsDigit(e.KeyChar) && (e.KeyChar != backSpaceCode))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public TextBox GetTextBox(string name, Size size, Point location, int tabIndex, KeyPressEventHandler eventKeyPress)
         {
             TextBox result = new TextBox();
 
@@ -19,6 +41,8 @@ namespace SerializeLab.FactoryFormEditor
             result.Name = name;
             result.Size = size;
             result.TabIndex = tabIndex;
+            result.KeyPress += eventKeyPress;
+
 
             return result;
         }
@@ -56,19 +80,19 @@ namespace SerializeLab.FactoryFormEditor
             List<Control> result = new List<Control>();
 
             result.Add(GetLabel("Weigth", size, new Point(5, 10), 1));
-            result.Add(GetTextBox("Weigth", size, new Point(5, 35), 2));
+            result.Add(GetTextBox("Weigth", size, new Point(5, 35), 2, TextBoxNumb_KeyPress));
 
             result.Add(GetLabel("Color", size, new Point(5, 60), 3));
-            result.Add(GetTextBox("Color", size, new Point(5, 85), 4));
+            result.Add(GetTextBox("Color", size, new Point(5, 85), 4, TextBoxText_KeyPress));
 
             result.Add(GetLabel("Mark", size, new Point(5, 110), 5));
-            result.Add(GetTextBox("Mark", size, new Point(5, 135), 6));
+            result.Add(GetTextBox("Mark", size, new Point(5, 135), 6, TextBoxText_KeyPress));
 
             result.Add(GetLabel("Width", size, new Point(5, 160), 7));
-            result.Add(GetTextBox("Width", size, new Point(5, 185), 8));
+            result.Add(GetTextBox("Width", size, new Point(5, 185), 8, TextBoxNumb_KeyPress));
 
             result.Add(GetLabel("Height", size, new Point(5, 210), 9));
-            result.Add(GetTextBox("Height", size, new Point(5, 235), 10));
+            result.Add(GetTextBox("Height", size, new Point(5, 235), 10, TextBoxNumb_KeyPress));
 
             return result;
         }
@@ -101,11 +125,19 @@ namespace SerializeLab.FactoryFormEditor
 
             Control[] controlList = GetInputControl(controls);
 
-            currentAuto.Weigth = Convert.ToInt32(controlList[WeightIndex].Text);
-            currentAuto.Color = controlList[ColorIndex].Text;
-            currentAuto.Mark = controlList[MarkIndex].Text;
-            currentAuto.Height = Convert.ToInt32(controlList[HeightIndex].Text);
-            currentAuto.Width = Convert.ToInt32(controlList[WidthIndex].Text);
+            try
+            {
+                currentAuto.Weigth = Convert.ToInt32(controlList[WeightIndex].Text);
+                currentAuto.Color = controlList[ColorIndex].Text;
+                currentAuto.Mark = controlList[MarkIndex].Text;
+                currentAuto.Height = Convert.ToInt32(controlList[HeightIndex].Text);
+                currentAuto.Width = Convert.ToInt32(controlList[WidthIndex].Text);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
         public virtual void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
         {
@@ -122,6 +154,46 @@ namespace SerializeLab.FactoryFormEditor
             controlList[MarkIndex].Text = currentAuto.Mark;
             controlList[HeightIndex].Text = Convert.ToString(currentAuto.Height);
             controlList[WidthIndex].Text = Convert.ToString(currentAuto.Width);
+        }
+
+        public char Separator = '|';
+        public virtual void SerializeObject(StreamWriter file, Auto currentAuto)
+        {
+            file.Write(currentAuto.ClassIndex);
+            file.Write(Separator);
+            file.Write(currentAuto.Weigth);
+            file.Write(Separator);
+            file.Write(currentAuto.Color);
+            file.Write(Separator);
+            file.Write(currentAuto.Mark);
+            file.Write(Separator);
+            file.Write(currentAuto.Height);
+            file.Write(Separator);
+            file.Write(currentAuto.Width);
+            file.Write(Separator);
+        }
+        public virtual void DeserializeObject(List<string> data, Auto currentAuto)
+        {
+            const int currentItemList = 0;
+
+            try
+            {
+                currentAuto.Weigth = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                currentAuto.Color = data[currentItemList];
+                data.RemoveAt(currentItemList);
+                currentAuto.Mark = data[currentItemList];
+                data.RemoveAt(currentItemList);
+                currentAuto.Height = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                currentAuto.Width = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
     }
 }

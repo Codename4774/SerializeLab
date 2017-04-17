@@ -13,7 +13,25 @@ namespace SerializeLab.Classes.CarClasses
     {
         public enum KindOfHatch { Hatch, SlidingHatch, PanoramicSunroof };
         public KindOfHatch KindHatch { set; get; }
-        public int SaloonVolume { set; get; }
+        private int saloonVolume;
+        public int SaloonVolume
+        {
+            set
+            {
+                if (IsCorrectNumb(value))
+                {
+                    saloonVolume = value;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            get
+            {
+                return saloonVolume;
+            }
+        }
         public CarWithClosedRoof(int classIndex)
             : base(classIndex)
         { }

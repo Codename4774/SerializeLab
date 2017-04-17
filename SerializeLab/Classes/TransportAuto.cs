@@ -8,8 +8,45 @@ namespace SerializeLab.Classes
 {
     public class TransportAuto : Auto
     {
-        public int CountSittingPlace { get; set; }
-        public int CountStandingPlace { get; set; }
+        private int countSittingPlace;
+        public int CountSittingPlace
+        {
+            set
+            {
+                if (IsCorrectNumb(value))
+                {
+                    countSittingPlace = value;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            get
+            {
+                return countSittingPlace;
+            }
+        }
+        private int countStandingPlace;
+        public int CountStandingPlace
+        {
+            set
+            {
+                if (IsCorrectNumb(value))
+                {
+                    countStandingPlace = value;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            get
+            {
+                return countStandingPlace;
+            }
+        }
+
         public TransportAuto(int classIndex)
             : base(classIndex)
         { }

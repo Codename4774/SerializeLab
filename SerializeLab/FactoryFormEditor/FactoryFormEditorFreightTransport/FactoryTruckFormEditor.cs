@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Drawing;
 using SerializeLab.Classes.FreightTransportClasses;
 using SerializeLab.Classes;
+using System.IO;
+
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 {
     class FactoryTruckFormEditor : FactoryFreightTransportFormEditor
@@ -31,9 +33,16 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
             const int KindTrailerIndex = 7;
 
             Control[] controlList = GetInputControl(controls);
-
-            Truck currentTransport = (Truck)currentAuto;
-            currentTransport.KindTrailer = (Truck.KindOfTrailer)Enum.Parse(typeof(Truck.KindOfTrailer), controlList[KindTrailerIndex].Text);
+            try
+            {
+                Truck currentTransport = (Truck)currentAuto;
+                currentTransport.KindTrailer = (Truck.KindOfTrailer)Enum.Parse(typeof(Truck.KindOfTrailer), controlList[KindTrailerIndex].Text);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
         {
@@ -45,6 +54,35 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 
             Truck currentTransport = (Truck)currentAuto;
             controlList[KindTrailerIndex].Text = Enum.GetName(typeof(Truck.KindOfTrailer), currentTransport.KindTrailer);
+        }
+
+        public override void SerializeObject(StreamWriter file, Auto currentAuto)
+        {
+            base.SerializeObject(file, currentAuto);
+
+            Truck currentTransport = (Truck)currentAuto;
+            file.Write(currentTransport.KindTrailer);
+            file.Write(Separator);
+        }
+
+        public override void DeserializeObject(List<string> data, Auto currentAuto)
+        {
+
+            base.DeserializeObject(data, currentAuto);
+
+            const int currentItemList = 0;
+
+            try
+            {
+                Truck currentTransport = (Truck)currentAuto;
+                currentTransport.KindTrailer = (Truck.KindOfTrailer)Enum.Parse(typeof(Truck.KindOfTrailer), data[currentItemList]);
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception();
+            }
         }
     }
 }

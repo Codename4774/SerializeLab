@@ -8,9 +8,44 @@ namespace SerializeLab.Classes
 {
     public class FreightTransport : Auto
     {
-        public int MaximumTransporedCargo { set; get; }
-
-        public int CountAxles { set; get; }
+        private int maximumTransporedCargo;
+        public int MaximumTransporedCargo
+        {
+            set
+            {
+                if (IsCorrectNumb(value))
+                {
+                    maximumTransporedCargo = value;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            get
+            {
+                return maximumTransporedCargo;
+            }
+        }
+        private int countAxles;
+        public int CountAxles
+        {
+            set
+            {
+                if (IsCorrectNumb(value))
+                {
+                    countAxles = value;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            get
+            {
+                return countAxles;
+            }
+        }
         public FreightTransport(int classIndex)
             : base(classIndex)
         { }

@@ -8,7 +8,25 @@ namespace SerializeLab.Classes.TransportAutoClasses
 {
     class TrolleyBus : TransportAuto
     {
-        public int LengthOfRods { set; get; }
+        private int lengthOfRods;
+        public int LengthOfRods
+        {
+            set
+            {
+                if (IsCorrectNumb(value))
+                {
+                    lengthOfRods = value;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            get
+            {
+                return lengthOfRods;
+            }
+        }
         public TrolleyBus(int classIndex)
             : base(classIndex)
         { }
