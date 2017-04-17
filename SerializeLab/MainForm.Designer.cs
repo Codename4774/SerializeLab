@@ -39,7 +39,8 @@
             this.ComboBoxInput = new System.Windows.Forms.ComboBox();
             this.PanelEditing = new System.Windows.Forms.Panel();
             this.ButtonSubmitEdit = new System.Windows.Forms.Button();
-            this.OpenSerializefileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.OpenSerializeFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.SaveSerializeFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,6 +149,14 @@
             this.ButtonSubmitEdit.UseVisualStyleBackColor = true;
             this.ButtonSubmitEdit.Click += new System.EventHandler(this.ButtonSubmitEdit_Click);
             // 
+            // OpenSerializeFileDialog
+            // 
+            this.OpenSerializeFileDialog.Filter = "Text files(*.txt)|*.txt";
+            // 
+            // SaveSerializeFileDialog
+            // 
+            this.SaveSerializeFileDialog.DefaultExt = "txt";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,7 +193,8 @@
         private System.Windows.Forms.ComboBox ComboBoxInput;
         private System.Windows.Forms.Panel PanelEditing;
         private System.Windows.Forms.Button ButtonSubmitEdit;
-        private System.Windows.Forms.OpenFileDialog OpenSerializefileDialog;
+        private System.Windows.Forms.OpenFileDialog OpenSerializeFileDialog;
+        private System.Windows.Forms.SaveFileDialog SaveSerializeFileDialog;
     }
 }
 

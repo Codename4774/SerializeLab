@@ -34,9 +34,9 @@ namespace SerializeLab
 
         private void serializeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (OpenSerializefileDialog.ShowDialog() != DialogResult.Cancel)
+            if (SaveSerializeFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                factoryFormEditor.SerializeList(OpenSerializefileDialog.FileName, AutoList, factoryFormEditor);
+                factoryFormEditor.SerializeList(SaveSerializeFileDialog.FileName, AutoList, factoryFormEditor);
             }
         }
 
@@ -89,9 +89,9 @@ namespace SerializeLab
 
         private void deserializeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (OpenSerializefileDialog.ShowDialog() != DialogResult.Cancel)
+            if (OpenSerializeFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                factoryFormEditor.DeserializeList(OpenSerializefileDialog.FileName, AutoList, factoryFormEditor);
+                factoryFormEditor.DeserializeList(OpenSerializeFileDialog.FileName, AutoList, factoryFormEditor);
             }
         }
 
