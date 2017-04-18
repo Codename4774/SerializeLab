@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Auto.cs" />
+    <Compile Include="Classes\AutoListClass.cs" />
     <Compile Include="Classes\Car.cs" />
     <Compile Include="Classes\CarClasses\CarWithClosedRoof.cs" />
     <Compile Include="Classes\CarClasses\CarWithOpenRoof.cs" />
@@ -54,17 +55,17 @@
     <Compile Include="Classes\TransportAuto.cs" />
     <Compile Include="Classes\TransportAutoClasses\Bus.cs" />
     <Compile Include="Classes\TransportAutoClasses\TrolleyBus.cs" />
-    <Compile Include="FactoryFormEditor\FactoryCarFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryAutoFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFormEditorList.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFormEditorCar\FactoryCarWithClosedRoofFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFormEditorCar\FactoryCarWithOpenedRoofFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFormEditorFreightTransport\FactoryLorryFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFormEditorFreightTransport\FactoryTruckFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFormEditorTransportAuto\FactoryBusFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFormEditorTransportAuto\FactoryTrolleyBusFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryFreightTransportFormEditor.cs" />
-    <Compile Include="FactoryFormEditor\FactoryTransportAutoFormEditor.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryCar.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryAuto.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryAutos.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryCarClasses\FactoryCarWithClosedRoof.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryCarClasses\FactoryCarWithOpenedRoof.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryFreightTransportClasses\FactoryLorry.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryFreightTransportClasses\FactoryTruck.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryTransportAutoClasses\FactoryBus.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryTransportAutoClasses\FactoryTrolleyBus.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryFreightTransport.cs" />
+    <Compile Include="FactoryAutoClasses\FactoryTransportAuto.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

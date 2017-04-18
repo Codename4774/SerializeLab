@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 {
-    class FactoryTruckFormEditor : FactoryFreightTransportFormEditor
+    class FactoryTruck : FactoryFreightTransport
     {
         public override List<Control> GetListControlsForInput(Size size)
         {
@@ -54,35 +54,6 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 
             Truck currentTransport = (Truck)currentAuto;
             controlList[KindTrailerIndex].Text = Enum.GetName(typeof(Truck.KindOfTrailer), currentTransport.KindTrailer);
-        }
-
-        public override void SerializeObject(StreamWriter file, Auto currentAuto)
-        {
-            base.SerializeObject(file, currentAuto);
-
-            Truck currentTransport = (Truck)currentAuto;
-            file.Write(currentTransport.KindTrailer);
-            file.Write(Separator);
-        }
-
-        public override void DeserializeObject(List<string> data, Auto currentAuto)
-        {
-
-            base.DeserializeObject(data, currentAuto);
-
-            const int currentItemList = 0;
-
-            try
-            {
-                Truck currentTransport = (Truck)currentAuto;
-                currentTransport.KindTrailer = (Truck.KindOfTrailer)Enum.Parse(typeof(Truck.KindOfTrailer), data[currentItemList]);
-                data.RemoveAt(currentItemList);
-            }
-            catch
-            {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
-            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace SerializeLab.Classes.CarClasses
 {
@@ -24,6 +25,34 @@ namespace SerializeLab.Classes.CarClasses
         {
             this.SystemOpeningRoof = systemOpeningRoof;
             this.KindRoof = kindRoof;
+        }
+        public override void SerializeObject(StreamWriter file, char separator)
+        {
+            base.SerializeObject(file, separator);
+
+            file.Write(this.SystemOpeningRoof);
+            file.Write(separator);
+            file.Write(this.KindRoof);
+            file.Write(separator);
+        }
+        public override void DeserializeObject(List<string> data)
+        {
+
+            base.DeserializeObject(data);
+
+            const int currentItemList = 0;
+
+            try
+            {
+                this.SystemOpeningRoof = (CarWithOpenRoof.SystemOfOpeningRoof)Enum.Parse(typeof(CarWithOpenRoof.SystemOfOpeningRoof), data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                this.KindRoof = (CarWithOpenRoof.KindOfRoof)Enum.Parse(typeof(CarWithOpenRoof.KindOfRoof), data[currentItemList], true);
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                throw new Exception();
+            }
         }
     }
 }

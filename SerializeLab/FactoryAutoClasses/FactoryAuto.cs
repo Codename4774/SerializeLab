@@ -10,7 +10,7 @@ using System.IO;
 
 namespace SerializeLab.FactoryFormEditor
 {
-    public abstract class FactoryAutoFormEditor
+    public abstract class FactoryAuto
     {
 
         public void TextBoxText_KeyPress(object sender, KeyPressEventArgs e)
@@ -154,46 +154,6 @@ namespace SerializeLab.FactoryFormEditor
             controlList[MarkIndex].Text = currentAuto.Mark;
             controlList[HeightIndex].Text = Convert.ToString(currentAuto.Height);
             controlList[WidthIndex].Text = Convert.ToString(currentAuto.Width);
-        }
-
-        public char Separator = '|';
-        public virtual void SerializeObject(StreamWriter file, Auto currentAuto)
-        {
-            file.Write(currentAuto.ClassIndex);
-            file.Write(Separator);
-            file.Write(currentAuto.Weigth);
-            file.Write(Separator);
-            file.Write(currentAuto.Color);
-            file.Write(Separator);
-            file.Write(currentAuto.Mark);
-            file.Write(Separator);
-            file.Write(currentAuto.Height);
-            file.Write(Separator);
-            file.Write(currentAuto.Width);
-            file.Write(Separator);
-        }
-        public virtual void DeserializeObject(List<string> data, Auto currentAuto)
-        {
-            const int currentItemList = 0;
-
-            try
-            {
-                currentAuto.Weigth = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-                currentAuto.Color = data[currentItemList];
-                data.RemoveAt(currentItemList);
-                currentAuto.Mark = data[currentItemList];
-                data.RemoveAt(currentItemList);
-                currentAuto.Height = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-                currentAuto.Width = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-            }
-            catch
-            {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
-            }
         }
     }
 }

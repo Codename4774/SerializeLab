@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 {
-    class FactoryLorryFormEditor : FactoryFreightTransportFormEditor
+    class FactoryLorry : FactoryFreightTransport
     {
         public override List<Control> GetListControlsForInput(Size size)
         {
@@ -62,39 +62,6 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
             Lorry currentTransport = (Lorry)currentAuto;
             controlList[KindTrunkIndex].Text = Enum.GetName(typeof(Lorry.KindOfTrunk), currentTransport.KindTrunk);
             controlList[SystemOfTrunkIndex].Text = Enum.GetName(typeof(Lorry.FixedOrLiftedTrunk), currentTransport.SystemOfTrunk);
-        }
-
-        public override void SerializeObject(StreamWriter file, Auto currentAuto)
-        {
-            base.SerializeObject(file, currentAuto);
-
-            Lorry currentTransport = (Lorry)currentAuto;
-            file.Write(currentTransport.KindTrunk);
-            file.Write(Separator);
-            file.Write(currentTransport.SystemOfTrunk);
-            file.Write(Separator);
-        }
-
-        public override void DeserializeObject(List<string> data, Auto currentAuto)
-        {
-
-            base.DeserializeObject(data, currentAuto);
-
-            const int currentItemList = 0;
-
-            try
-            {
-                Lorry currentTransport = (Lorry)currentAuto;
-                currentTransport.KindTrunk = (Lorry.KindOfTrunk)Enum.Parse(typeof(Lorry.KindOfTrunk), data[currentItemList]);
-                data.RemoveAt(currentItemList);
-                currentTransport.SystemOfTrunk = (Lorry.FixedOrLiftedTrunk)Enum.Parse(typeof(Lorry.FixedOrLiftedTrunk), data[currentItemList]);
-                data.RemoveAt(currentItemList);
-            }
-            catch
-            {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
-            }
         }
     }
 }

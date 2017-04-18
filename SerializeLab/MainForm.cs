@@ -15,9 +15,7 @@ namespace SerializeLab
 {
     public partial class MainForm : Form
     {
-        private BindingList<Auto> autoList = new BindingList<Auto>();
-        public BindingList<Auto> AutoList { set; get; }
-
+        AutoListClass list = new AutoListClass();
         public MainForm()
         {
             InitializeComponent();
@@ -25,18 +23,18 @@ namespace SerializeLab
             PanelAdding.Controls.Clear();
             PanelAdding.Controls.AddRange(factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
             PanelAdding.Tag = factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(ComboBoxInput.SelectedIndex); 
-            AutoList = new BindingList<Auto>();
-            ListBoxAutos.DataSource = AutoList;
+            
+            ListBoxAutos.DataSource = list.AutoList;
             ListBoxAutos.DisplayMember = "Mark";
         }
 
-        private static FactoryFormEditorList factoryFormEditor = new FactoryFormEditorList();
+        private static FactoryAutos factoryFormEditor = new FactoryAutos();
 
         private void serializeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (SaveSerializeFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                factoryFormEditor.SerializeList(SaveSerializeFileDialog.FileName, AutoList, factoryFormEditor);
+                list.SerializeList(SaveSerializeFileDialog.FileName);
             }
         }
 
@@ -48,6 +46,7 @@ namespace SerializeLab
                 PanelEditing.Controls.Clear();
                 PanelEditing.Controls.AddRange(factoryFormEditor.FactoryList[currentAuto.ClassIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
                 factoryFormEditor.FactoryList[currentAuto.ClassIndex].AddAttribsToControls(currentAuto, PanelEditing.Controls);
+                LabelTypeEditedAuto.Text = ComboBoxInput.Items[currentAuto.ClassIndex].ToString();
                 PanelEditing.Tag = currentAuto;
             }
         }
@@ -61,10 +60,11 @@ namespace SerializeLab
             }
             catch
             {
+                MessageBox.Show("Incorrect data. Please, try again.");
                 return;
             }
             PanelAdding.Tag = factoryFormEditor.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(ComboBoxInput.SelectedIndex);
-            AutoList.Add(temp);
+            list.AutoList.Add(temp);
         }
         private void ComboBoxInput_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -82,16 +82,17 @@ namespace SerializeLab
             }
             catch
             {
+                MessageBox.Show("Incorrect data. Please, try again.");
                 return;
             }
-            AutoList.ResetBindings();
+            list.AutoList.ResetBindings();
         }
 
         private void deserializeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (OpenSerializeFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                factoryFormEditor.DeserializeList(OpenSerializeFileDialog.FileName, AutoList, factoryFormEditor);
+                list.DeserializeList(OpenSerializeFileDialog.FileName, factoryFormEditor);
             }
         }
 
@@ -103,7 +104,7 @@ namespace SerializeLab
                 if (MessageBox.Show("Are you sure?", "SerializeLab", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     Auto temp = (Auto)ListBoxAutos.SelectedItem;
-                    AutoList.Remove(temp);
+                    list.AutoList.Remove(temp);
                     PanelEditing.Controls.Clear();
                 }
             }

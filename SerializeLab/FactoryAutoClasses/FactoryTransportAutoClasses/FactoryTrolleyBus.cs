@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 {
-    class FactoryTrolleyBusFormEditor : FactoryTransportAutoFormEditor
+    class FactoryTrolleyBus : FactoryTransportAuto
     {
         public override List<Control> GetListControlsForInput(Size size)
         {
@@ -56,34 +56,6 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 
             TrolleyBus currentTransport = (TrolleyBus)currentAuto;
             controlList[LengthOfRodsIndex].Text = Convert.ToString(currentTransport.LengthOfRods);
-        }
-
-        public override void SerializeObject(StreamWriter file, Auto currentAuto)
-        {
-            base.SerializeObject(file, currentAuto);
-
-            TrolleyBus currentTransport = (TrolleyBus)currentAuto;
-            file.Write(currentTransport.LengthOfRods);
-            file.Write(Separator);
-        }
-
-        public override void DeserializeObject(List<string> data, Auto currentAuto)
-        {
-            base.DeserializeObject(data, currentAuto);
-
-            const int currentItemList = 0;
-
-            try
-            {
-                TrolleyBus currentTransport = (TrolleyBus)currentAuto;
-                currentTransport.LengthOfRods = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-            }
-            catch
-            {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
-            }
         }
     }
 }

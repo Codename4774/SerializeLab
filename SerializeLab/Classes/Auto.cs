@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 
 namespace SerializeLab.Classes
@@ -101,6 +102,43 @@ namespace SerializeLab.Classes
             else
             {
                 return true;
+            }
+        }
+        public virtual void SerializeObject(StreamWriter file, char separator)
+        {
+            file.Write(this.ClassIndex);
+            file.Write(separator);
+            file.Write(this.Weigth);
+            file.Write(separator);
+            file.Write(this.Color);
+            file.Write(separator);
+            file.Write(this.Mark);
+            file.Write(separator);
+            file.Write(this.Height);
+            file.Write(separator);
+            file.Write(this.Width);
+            file.Write(separator);
+        }
+        public virtual void DeserializeObject(List<string> data)
+        {
+            const int currentItemList = 0;
+
+            try
+            {
+                this.Weigth = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                this.Color = data[currentItemList];
+                data.RemoveAt(currentItemList);
+                this.Mark = data[currentItemList];
+                data.RemoveAt(currentItemList);
+                this.Height = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                this.Width = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                throw new Exception();
             }
         }
     }

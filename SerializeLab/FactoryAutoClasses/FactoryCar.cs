@@ -10,7 +10,7 @@ using System.IO;
 
 namespace SerializeLab.FactoryFormEditor
 {
-    abstract class FactoryCarFormEditor : FactoryAutoFormEditor
+    abstract class FactoryCar : FactoryAuto
     {
         public override List<Control> GetListControlsForInput(Size size)
         {
@@ -55,37 +55,6 @@ namespace SerializeLab.FactoryFormEditor
             Car currentCar = (Car)currentAuto;
             controlList[CountPlacesIndex].Text = Convert.ToString(currentCar.CountPlaces);
             controlList[BagageCapacityIndex].Text = Convert.ToString(currentCar.BagageCapacity);
-        }
-
-        public override void SerializeObject(StreamWriter file, Auto currentAuto)
-        {
-            base.SerializeObject(file, currentAuto);
-
-            Car currentCar = (Car)currentAuto;
-            file.Write(currentCar.CountPlaces);
-            file.Write(Separator);
-            file.Write(currentCar.BagageCapacity);
-            file.Write(Separator);
-        }
-        public override void DeserializeObject(List<string> data, Auto currentAuto)
-        {
-            base.DeserializeObject(data, currentAuto);
-
-            const int currentItemList = 0;
-
-            try
-            {
-                Car currentCar = (Car)currentAuto;
-                currentCar.CountPlaces = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-                currentCar.BagageCapacity = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-            }
-            catch
-            {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
-            }
         }
     }
 }

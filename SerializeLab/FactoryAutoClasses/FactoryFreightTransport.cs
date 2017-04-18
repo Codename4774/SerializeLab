@@ -10,7 +10,7 @@ using System.IO;
 
 namespace SerializeLab.FactoryFormEditor
 {
-    abstract class FactoryFreightTransportFormEditor : FactoryAutoFormEditor
+    abstract class FactoryFreightTransport : FactoryAuto
     {
         public override List<Control> GetListControlsForInput(Size size)
         {
@@ -56,38 +56,6 @@ namespace SerializeLab.FactoryFormEditor
             FreightTransport currentTransport = (FreightTransport)currentAuto;
             controlList[MaximumTransporedCargoIndex].Text = Convert.ToString(currentTransport.MaximumTransporedCargo);
             controlList[CountAxlesIndex].Text = Convert.ToString(currentTransport.CountAxles);
-        }
-
-        public override void SerializeObject(StreamWriter file, Auto currentAuto)
-        {
-            base.SerializeObject(file, currentAuto);
-
-            FreightTransport currentTransport = (FreightTransport)currentAuto;
-            file.Write(currentTransport.MaximumTransporedCargo);
-            file.Write(Separator);
-            file.Write(currentTransport.CountAxles);
-            file.Write(Separator);
-        }
-
-        public override void DeserializeObject(List<string> data, Auto currentAuto)
-        {
-            base.DeserializeObject(data, currentAuto);
-
-            const int currentItemList = 0;
-
-            try
-            {
-                FreightTransport currentTransport = (FreightTransport)currentAuto;
-                currentTransport.MaximumTransporedCargo = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-                currentTransport.CountAxles = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-            }
-            catch
-            {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
-            }
         }
     }
 }

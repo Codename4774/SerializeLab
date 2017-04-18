@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SerializeLab.Classes
 {
@@ -54,6 +55,34 @@ namespace SerializeLab.Classes
         {
             this.MaximumTransporedCargo = maximumTransporedCargo;
             this.CountAxles = countAxles;
+        }
+        public override void SerializeObject(StreamWriter file, char separator)
+        {
+            base.SerializeObject(file, separator);
+
+            file.Write(this.MaximumTransporedCargo);
+            file.Write(separator);
+            file.Write(this.CountAxles);
+            file.Write(separator);
+        }
+
+        public override void DeserializeObject(List<string> data)
+        {
+            base.DeserializeObject(data);
+
+            const int currentItemList = 0;
+
+            try
+            {
+                this.MaximumTransporedCargo = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+                this.CountAxles = Convert.ToInt32(data[currentItemList]);
+                data.RemoveAt(currentItemList);
+            }
+            catch
+            {
+                throw new Exception();
+            }
         }
     }
 }

@@ -41,6 +41,7 @@
             this.ButtonSubmitEdit = new System.Windows.Forms.Button();
             this.OpenSerializeFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveSerializeFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.LabelTypeEditedAuto = new System.Windows.Forms.Label();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,14 +67,14 @@
             // serializeToolStripMenuItem
             // 
             this.serializeToolStripMenuItem.Name = "serializeToolStripMenuItem";
-            this.serializeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.serializeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.serializeToolStripMenuItem.Text = "Serialize";
             this.serializeToolStripMenuItem.Click += new System.EventHandler(this.serializeToolStripMenuItem_Click);
             // 
             // deserializeToolStripMenuItem
             // 
             this.deserializeToolStripMenuItem.Name = "deserializeToolStripMenuItem";
-            this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.deserializeToolStripMenuItem.Text = "Deserialize";
             this.deserializeToolStripMenuItem.Click += new System.EventHandler(this.deserializeToolStripMenuItem_Click);
             // 
@@ -134,9 +135,9 @@
             // PanelEditing
             // 
             this.PanelEditing.AutoScroll = true;
-            this.PanelEditing.Location = new System.Drawing.Point(248, 32);
+            this.PanelEditing.Location = new System.Drawing.Point(248, 54);
             this.PanelEditing.Name = "PanelEditing";
-            this.PanelEditing.Size = new System.Drawing.Size(240, 329);
+            this.PanelEditing.Size = new System.Drawing.Size(240, 307);
             this.PanelEditing.TabIndex = 9;
             // 
             // ButtonSubmitEdit
@@ -157,11 +158,20 @@
             // 
             this.SaveSerializeFileDialog.DefaultExt = "txt";
             // 
+            // LabelTypeEditedAuto
+            // 
+            this.LabelTypeEditedAuto.AutoSize = true;
+            this.LabelTypeEditedAuto.Location = new System.Drawing.Point(248, 32);
+            this.LabelTypeEditedAuto.Name = "LabelTypeEditedAuto";
+            this.LabelTypeEditedAuto.Size = new System.Drawing.Size(0, 13);
+            this.LabelTypeEditedAuto.TabIndex = 11;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 400);
+            this.Controls.Add(this.LabelTypeEditedAuto);
             this.Controls.Add(this.ButtonSubmitEdit);
             this.Controls.Add(this.PanelEditing);
             this.Controls.Add(this.ComboBoxInput);
@@ -195,6 +205,7 @@
         private System.Windows.Forms.Button ButtonSubmitEdit;
         private System.Windows.Forms.OpenFileDialog OpenSerializeFileDialog;
         private System.Windows.Forms.SaveFileDialog SaveSerializeFileDialog;
+        private System.Windows.Forms.Label LabelTypeEditedAuto;
     }
 }
 

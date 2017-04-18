@@ -11,7 +11,7 @@ using System.IO;
 
 namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
 {
-    class FactoryCarWithClosedRoofFormEditor : FactoryCarFormEditor
+    class FactoryCarWithClosedRoof : FactoryCar
     {
         public override List<Control> GetListControlsForInput(Size size)
         {
@@ -63,38 +63,5 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             controlList[KindHatchIndex].Text = Enum.GetName(typeof(CarWithClosedRoof.KindOfHatch), currentCar.KindHatch);
             controlList[SaloonVolumeIndex].Text = Convert.ToString(currentCar.SaloonVolume);
         }
-        public override void SerializeObject(StreamWriter file, Auto currentAuto)
-        {
-            base.SerializeObject(file, currentAuto);
-
-            CarWithClosedRoof currentCar = (CarWithClosedRoof)currentAuto;
-            file.Write(currentCar.KindHatch);
-            file.Write(Separator);
-            file.Write(currentCar.SaloonVolume);
-            file.Write(Separator);
-        }
-
-        public override void DeserializeObject(List<string> data, Auto currentAuto)
-        {
-
-            base.DeserializeObject(data, currentAuto);
-
-            const int currentItemList = 0;
-
-            try
-            {
-                CarWithClosedRoof currentCar = (CarWithClosedRoof)currentAuto;
-                currentCar.KindHatch = (CarWithClosedRoof.KindOfHatch)Enum.Parse(typeof(CarWithClosedRoof.KindOfHatch), data[currentItemList]);
-                data.RemoveAt(currentItemList);
-                currentCar.SaloonVolume = Convert.ToInt32(data[currentItemList]);
-                data.RemoveAt(currentItemList);
-            }
-            catch
-            {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
-            }
-        }
     }
-
 }
