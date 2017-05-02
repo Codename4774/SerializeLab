@@ -63,5 +63,9 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             controlList[KindHatchIndex].Text = Enum.GetName(typeof(CarWithClosedRoof.KindOfHatch), currentCar.KindHatch);
             controlList[SaloonVolumeIndex].Text = Convert.ToString(currentCar.SaloonVolume);
         }
+        public FactoryCarWithClosedRoof()
+        {
+            typeName = "CarWithClosedRoof";
+        }
     }
 }

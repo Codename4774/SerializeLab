@@ -14,8 +14,8 @@ namespace SerializeLab.FactoryFormEditor
 {
     public class FactoryAutos
     {
-        public List<FactoryAuto> factoryList;
-        public List<FactoryAuto> FactoryList
+        private List<dynamic> factoryList;
+        public List<dynamic> FactoryList
         {
             get
             {
@@ -28,7 +28,7 @@ namespace SerializeLab.FactoryFormEditor
         }
         public FactoryAutos()
         {
-            factoryList = new List<FactoryAuto>();
+            factoryList = new List<dynamic>();
             FactoryList.Add(new FactoryCarWithClosedRoof());
             FactoryList.Add(new FactoryCarWithOpenedRoof());
             FactoryList.Add(new FactoryLorry());

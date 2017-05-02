@@ -63,5 +63,9 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
             controlList[KindTrunkIndex].Text = Enum.GetName(typeof(Lorry.KindOfTrunk), currentTransport.KindTrunk);
             controlList[SystemOfTrunkIndex].Text = Enum.GetName(typeof(Lorry.FixedOrLiftedTrunk), currentTransport.SystemOfTrunk);
         }
+        public FactoryLorry()
+        {
+            typeName = "Lorry";
+        }
     }
 }

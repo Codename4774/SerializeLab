@@ -57,5 +57,9 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
             TrolleyBus currentTransport = (TrolleyBus)currentAuto;
             controlList[LengthOfRodsIndex].Text = Convert.ToString(currentTransport.LengthOfRods);
         }
+        public FactoryTrolleyBus()
+        {
+            typeName = "TrolleyBuss";
+        }
     }
 }

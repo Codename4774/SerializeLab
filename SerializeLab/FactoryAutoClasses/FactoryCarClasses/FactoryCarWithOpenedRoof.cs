@@ -62,5 +62,9 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             controlList[SystemOpeningRoofIndex].Text = Enum.GetName(typeof(CarWithOpenRoof.SystemOfOpeningRoof), currentCar.SystemOpeningRoof);
             controlList[KindRoofIndex].Text = Enum.GetName(typeof(CarWithOpenRoof.KindOfRoof), currentCar.KindRoof);
         }
+        public FactoryCarWithOpenedRoof()
+        {
+            typeName = "CarWithOpenedRoof";
+        }
     }
 }

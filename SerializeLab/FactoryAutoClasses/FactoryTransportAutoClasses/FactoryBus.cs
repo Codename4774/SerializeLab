@@ -57,5 +57,9 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
             Bus currentTransport = (Bus)currentAuto;
             controlList[KindEngineIndex].Text = Enum.GetName(typeof(Bus.KindOfEngine), currentTransport.KindEngine);
         }
+        public FactoryBus()
+        {
+            typeName = "Bus";
+        }
     }
 }

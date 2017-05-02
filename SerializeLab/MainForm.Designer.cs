@@ -54,6 +54,7 @@
             this.MenuMain.Size = new System.Drawing.Size(748, 24);
             this.MenuMain.TabIndex = 1;
             this.MenuMain.Text = "menuStrip1";
+            this.MenuMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MenuMain_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -183,6 +184,7 @@
             this.MainMenuStrip = this.MenuMain;
             this.Name = "MainForm";
             this.Text = "SerializeLab";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.MenuMain.ResumeLayout(false);
             this.MenuMain.PerformLayout();
             this.ResumeLayout(false);

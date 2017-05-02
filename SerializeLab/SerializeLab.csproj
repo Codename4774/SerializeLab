@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Classes\Auto.cs" />
     <Compile Include="Classes\AutoListClass.cs" />
+    <Compile Include="Classes\AutoTypeInfo.cs" />
     <Compile Include="Classes\Car.cs" />
     <Compile Include="Classes\CarClasses\CarWithClosedRoof.cs" />
     <Compile Include="Classes\CarClasses\CarWithOpenRoof.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="FactoryAutoClasses\FactoryTransportAutoClasses\FactoryTrolleyBus.cs" />
     <Compile Include="FactoryAutoClasses\FactoryFreightTransport.cs" />
     <Compile Include="FactoryAutoClasses\FactoryTransportAuto.cs" />
+    <Compile Include="AppInitializator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

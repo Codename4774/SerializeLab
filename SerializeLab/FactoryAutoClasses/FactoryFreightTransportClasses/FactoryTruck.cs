@@ -55,5 +55,9 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
             Truck currentTransport = (Truck)currentAuto;
             controlList[KindTrailerIndex].Text = Enum.GetName(typeof(Truck.KindOfTrailer), currentTransport.KindTrailer);
         }
+        public FactoryTruck()
+        {
+            typeName = "Truck";
+        }
     }
 }

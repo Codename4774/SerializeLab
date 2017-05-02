@@ -12,13 +12,12 @@ namespace SerializeLab.Classes
 {
     public class AutoListClass
     {
-        private BindingList<Auto> autoList = new BindingList<Auto>();
-        public BindingList<Auto> AutoList { set; get; }
+        private BindingList<dynamic> autoList = new BindingList<dynamic>();
+        public BindingList<dynamic> AutoList { set; get; }
 
         public AutoListClass()
         {
-            //autoList = new BindingList<Auto>();
-            AutoList = new BindingList<Auto>();
+            AutoList = new BindingList<dynamic>();
         }
         
         private char separator = '|';
@@ -35,9 +34,9 @@ namespace SerializeLab.Classes
             file.Close();
         }
 
-        public void DeserializeList(string fileName, FactoryAutos factoryFormEditor)
+        public void DeserializeList(string fileName, FactoryAutos factoryAutos)
         {
-            const int ClassIndexPos = 0;
+            const int classIndexPos = 0;
 
             StreamReader file = new StreamReader(fileName, System.Text.Encoding.Default);
 
@@ -50,10 +49,10 @@ namespace SerializeLab.Classes
 
             while (fileDataSeparated.Count != 0)
             {
-                int classIndex = Convert.ToInt32(fileDataSeparated[ClassIndexPos]);
+                int classIndex = Convert.ToInt32(fileDataSeparated[classIndexPos]);
 
-                fileDataSeparated.RemoveAt(ClassIndexPos);
-                Auto addedItem = factoryFormEditor.FactoryList[classIndex].GetDataObject(classIndex);
+                fileDataSeparated.RemoveAt(classIndexPos);
+                dynamic addedItem = factoryAutos.FactoryList[classIndex].GetDataObject(classIndex);
                 addedItem.DeserializeObject(fileDataSeparated);
                 AutoList.Add(addedItem);
             }
