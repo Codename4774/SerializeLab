@@ -9,6 +9,9 @@ using SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto;
 using SerializeLab.Classes;
 using System.IO;
 using System.ComponentModel;
+using SerializeLab.Classes.CarClasses;
+using SerializeLab.Classes.FreightTransportClasses;
+using SerializeLab.Classes.TransportAutoClasses;
 
 namespace SerializeLab.FactoryFormEditor
 {
@@ -26,15 +29,27 @@ namespace SerializeLab.FactoryFormEditor
 
             }
         }
+        public List<string> TypesInfo
+        {
+            get;
+            private set;
+        }
         public FactoryAutos()
         {
             factoryList = new List<dynamic>();
+            TypesInfo = new List<string>();
             FactoryList.Add(new FactoryCarWithClosedRoof());
+            TypesInfo.Add(typeof(CarWithClosedRoof).Name);
             FactoryList.Add(new FactoryCarWithOpenedRoof());
+            TypesInfo.Add(typeof(CarWithOpenRoof).Name);
             FactoryList.Add(new FactoryLorry());
+            TypesInfo.Add(typeof(Lorry).Name);
             FactoryList.Add(new FactoryTruck());
+            TypesInfo.Add(typeof(Truck).Name);
             FactoryList.Add(new FactoryBus());
+            TypesInfo.Add(typeof(Bus).Name);
             FactoryList.Add(new FactoryTrolleyBus());
+            TypesInfo.Add(typeof(TrolleyBus).Name);
         }
     }
 }

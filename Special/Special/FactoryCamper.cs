@@ -55,7 +55,7 @@ namespace Factory
         }
         public FactoryCamper()
         {
-            typeName = "Camper";
+            typeName = typeof(Camper).Name;
         }
     }
 }

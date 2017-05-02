@@ -12,12 +12,12 @@ namespace SerializeLab.Classes
 {
     public class AutoListClass
     {
-        private BindingList<dynamic> autoList = new BindingList<dynamic>();
-        public BindingList<dynamic> AutoList { set; get; }
+        private List<dynamic> autoList = new List<dynamic>();
+        public List<dynamic> AutoList { set; get; }
 
         public AutoListClass()
         {
-            AutoList = new BindingList<dynamic>();
+            AutoList = new List<dynamic>();
         }
         
         private char separator = '|';
@@ -49,14 +49,25 @@ namespace SerializeLab.Classes
 
             while (fileDataSeparated.Count != 0)
             {
-                int classIndex = Convert.ToInt32(fileDataSeparated[classIndexPos]);
 
-                fileDataSeparated.RemoveAt(classIndexPos);
-                dynamic addedItem = factoryAutos.FactoryList[classIndex].GetDataObject(classIndex);
-                addedItem.DeserializeObject(fileDataSeparated);
-                AutoList.Add(addedItem);
+                int classIndex = factoryAutos.TypesInfo.IndexOf(fileDataSeparated[classIndexPos]);
+                if (classIndex < 0)
+                {
+                    string answ = "Unsupported member \"";
+                    answ = String.Concat(answ, fileDataSeparated[classIndexPos]);
+                    answ = String.Concat(answ, "\" for deserializing");
+
+                    throw new Exception(answ);
+                }
+                else
+                {
+                    fileDataSeparated.RemoveAt(classIndexPos);
+
+                    dynamic addedItem = factoryAutos.FactoryList[classIndex].GetDataObject(classIndex);
+                    addedItem.DeserializeObject(fileDataSeparated);
+                    AutoList.Add(addedItem);
+                }
             }
         }
-
     }
 }

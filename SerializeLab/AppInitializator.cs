@@ -35,13 +35,13 @@ namespace SerializeLab
             {
                 if ((String.Compare(Path.GetExtension(pluginsFileList[i]), ".dll") == 0))
                 {
-                    Assembly asm = Assembly.LoadFrom(pluginsFileList[i]);
+                    Assembly library = Assembly.LoadFrom(pluginsFileList[i]);
+                    List<Type> typesInLibrary = library.GetTypes().ToList();
 
-                    List<Type> typesInAsm = asm.GetTypes().ToList();
-                    typesInAsm = GetNewFactories(typesInAsm);
-                    for (int j = 0; j < typesInAsm.Count; j++)
+                    typesInLibrary = GetNewFactories(typesInLibrary);
+                    for (int j = 0; j < typesInLibrary.Count; j++)
                     {
-                        pluginsList.Add(typesInAsm[j]);
+                        pluginsList.Add(typesInLibrary[j]);
                     }
                 }
             }
@@ -65,8 +65,9 @@ namespace SerializeLab
 
             foreach (Type currPlugin in plugins)
             {
-                object temp = Activator.CreateInstance(currPlugin);
+                dynamic temp = Activator.CreateInstance(currPlugin);
                 result.FactoryList.Add(temp);
+                result.TypesInfo.Add(temp.TypeName);
             }
 
             return result;

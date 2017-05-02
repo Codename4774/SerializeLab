@@ -146,8 +146,8 @@ namespace SerializeLab.FactoryFormEditor
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }
         }
         public virtual void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)

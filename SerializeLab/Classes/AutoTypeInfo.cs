@@ -9,6 +9,19 @@ namespace SerializeLab.Classes
 {
     public class AutoTypeInfo
     {
-
+        private string typeName;
+        public string TypeName
+        {
+            get
+            {
+                return typeName;
+            }
+            private set
+            {
+            }
+        }
+        public AutoTypeInfo()
+        {
+        }
     }
 }

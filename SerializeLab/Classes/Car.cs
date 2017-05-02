@@ -22,7 +22,7 @@ namespace SerializeLab.Classes
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("Invalid data");
                 }
             }
             get
@@ -41,7 +41,7 @@ namespace SerializeLab.Classes
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("Invalid data");
                 }
             }
             get
@@ -83,7 +83,7 @@ namespace SerializeLab.Classes
             }
             catch
             {
-                throw new Exception();
+                throw new Exception("Invalid data");
             }
         }
 

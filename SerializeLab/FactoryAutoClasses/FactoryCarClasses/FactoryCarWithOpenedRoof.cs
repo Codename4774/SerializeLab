@@ -45,8 +45,8 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }        
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
@@ -64,7 +64,7 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
         }
         public FactoryCarWithOpenedRoof()
         {
-            typeName = "CarWithOpenedRoof";
+            typeName = typeof(CarWithOpenRoof).Name;
         }
     }
 }

@@ -20,7 +20,7 @@ public class Auto
             }
             else
             {
-                throw new Exception();
+                throw new Exception("Invalid data");
             }
         }
         get
@@ -41,7 +41,7 @@ public class Auto
             }
             else
             {
-                throw new Exception();
+                throw new Exception("Invalid data");
             }
         }
         get
@@ -60,7 +60,7 @@ public class Auto
             }
             else
             {
-                throw new Exception();
+                throw new Exception("Invalid data.");
             }
         }
         get
@@ -103,7 +103,7 @@ public class Auto
     }
     public virtual void SerializeObject(StreamWriter file, char separator)
     {
-        file.Write(this.ClassIndex);
+        file.Write(this.GetType().Name);
         file.Write(separator);
         file.Write(this.Weigth);
         file.Write(separator);
@@ -135,7 +135,7 @@ public class Auto
         }
         catch
         {
-            throw new Exception();
+            throw new Exception("Invalid data");
         }
     }
 }

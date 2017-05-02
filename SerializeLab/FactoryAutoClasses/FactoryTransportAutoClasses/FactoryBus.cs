@@ -42,8 +42,8 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
@@ -59,7 +59,7 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
         }
         public FactoryBus()
         {
-            typeName = "Bus";
+            typeName = typeof(Bus).Name;
         }
     }
 }

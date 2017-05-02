@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SerializeLab.Classes;
-
 using SerializeLab.FactoryFormEditor;
 
 namespace SerializeLab
@@ -24,13 +23,12 @@ namespace SerializeLab
             PanelAdding.Controls.AddRange(factoryAutos.FactoryList[ComboBoxInput.SelectedIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
             PanelAdding.Tag = factoryAutos.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(ComboBoxInput.SelectedIndex); 
             
-            ListBoxAutos.DataSource = list.AutoList;
-            ListBoxAutos.DisplayMember = "Mark";
             ComboBoxInput.Items.Clear();
             foreach (dynamic currFactory in factoryAutos.FactoryList)
             {
                 ComboBoxInput.Items.Add(currFactory.TypeName);
             }
+            ComboBoxInput.SelectedIndex = 0;
         }
 
         private static AppInitializator appInitializator = new AppInitializator();
@@ -45,9 +43,10 @@ namespace SerializeLab
 
         private void ListBoxAutos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dynamic currentAuto = ListBoxAutos.SelectedItem;
-            if (currentAuto != null)
+            if (ListBoxAutos.SelectedIndex != -1)
             {
+                dynamic currentAuto = list.AutoList[ListBoxAutos.SelectedIndex];
+
                 PanelEditing.Controls.Clear();
                 PanelEditing.Controls.AddRange(factoryAutos.FactoryList[currentAuto.ClassIndex].GetListControlsForInput(new Size(200, 20)).ToArray());
                 factoryAutos.FactoryList[currentAuto.ClassIndex].AddAttribsToControls(currentAuto, PanelEditing.Controls);
@@ -63,12 +62,13 @@ namespace SerializeLab
             {
                 factoryAutos.FactoryList[temp.ClassIndex].GetAttribsFromControls(temp, PanelAdding.Controls);
             }
-            catch
+            catch(Exception exeption)
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
+                MessageBox.Show(exeption.Message);
                 return;
             }
             PanelAdding.Tag = factoryAutos.FactoryList[ComboBoxInput.SelectedIndex].GetDataObject(ComboBoxInput.SelectedIndex);
+            ListBoxAutos.Items.Add(temp.Mark);
             list.AutoList.Add(temp);
         }
         private void ComboBoxInput_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,13 +86,13 @@ namespace SerializeLab
                 try
                 {
                     factoryAutos.FactoryList[temp.ClassIndex].GetAttribsFromControls(temp, PanelEditing.Controls);
+                    ListBoxAutos.Items[ListBoxAutos.SelectedIndex] = temp.Mark;
                 }
-                catch
+                catch(Exception exeption)
                 {
-                    MessageBox.Show("Incorrect data. Please, try again.");
+                    MessageBox.Show(exeption.Message);
                     return;
                 }
-                list.AutoList.ResetBindings();
             }
         }
 
@@ -100,7 +100,21 @@ namespace SerializeLab
         {
             if (OpenSerializeFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                list.DeserializeList(OpenSerializeFileDialog.FileName, factoryAutos);
+                try
+                {
+                    list.DeserializeList(OpenSerializeFileDialog.FileName, factoryAutos);
+                }
+                catch(Exception exeption)
+                {
+                    MessageBox.Show(exeption.Message);
+                }
+
+                ListBoxAutos.Items.Clear();
+
+                foreach (dynamic auto in list.AutoList)
+                {
+                    ListBoxAutos.Items.Add(auto.Mark);
+                }
             }
         }
 
@@ -111,8 +125,9 @@ namespace SerializeLab
             {
                 if (MessageBox.Show("Are you sure?", "SerializeLab", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    dynamic temp = ListBoxAutos.SelectedItem;
+                    dynamic temp = list.AutoList[ListBoxAutos.SelectedIndex];
                     list.AutoList.Remove(temp);
+                    ListBoxAutos.Items.Remove(ListBoxAutos.SelectedItem);
                     PanelEditing.Controls.Clear();
                     LabelTypeEditedAuto.Text = "";
                 }
@@ -121,11 +136,21 @@ namespace SerializeLab
 
         private void MenuMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+        }
+
+        private void ButtonDeleteAll_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure?", "SerializeLab", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                list.AutoList.Clear();
+                ListBoxAutos.Items.Clear();
+                PanelEditing.Controls.Clear();
+                LabelTypeEditedAuto.Text = "";
+            }
         }
     }
 }

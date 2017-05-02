@@ -13,7 +13,15 @@ public class Camper : SpecialAuto
         }
         set
         {
-            areaOfLivingSpace = value;
+            if (IsCorrectNumb(value))
+            {
+                areaOfLivingSpace = value;
+            }
+            else
+            {
+                throw new Exception("Invalid data");
+            }
+        
         }
     }
 
