@@ -71,6 +71,7 @@ namespace SerializeLab
             ListBoxAutos.Items.Add(temp.Mark);
             list.AutoList.Add(temp);
         }
+
         private void ComboBoxInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             PanelAdding.Controls.Clear();
@@ -120,7 +121,6 @@ namespace SerializeLab
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
-            
             if (ListBoxAutos.SelectedItem != null)
             {
                 if (MessageBox.Show("Are you sure?", "SerializeLab", MessageBoxButtons.YesNo) == DialogResult.Yes)

@@ -10,6 +10,7 @@ using System.IO;
 
 namespace Factory
 {
+    [NeedToAdd]
     public class FactoryCamper : FactoryAuto
     {
         public override List<Control> GetListControlsForInput(Size size)

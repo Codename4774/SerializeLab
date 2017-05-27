@@ -18,7 +18,9 @@ namespace SerializeLab
 
             foreach (Type currPlugin in plugins)
             {
-                if ((!currPlugin.IsAbstract) && (currPlugin.Name.IndexOf("Factory") >= 0))
+                
+                foreach(dynamic attrib in currPlugin.CustomAttributes)
+                if (attrib.AttributeType.Name == "NeedToAdd")
                 {
                     result.Add(currPlugin);
                 }

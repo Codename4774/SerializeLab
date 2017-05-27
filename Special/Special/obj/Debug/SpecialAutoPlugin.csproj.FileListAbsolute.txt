@@ -4,3 +4,9 @@ E:\my work\My Git dir\Special\Special\obj\Debug\SpecialAutoPlugin.csprojResolveA
 E:\my work\My Git dir\Special\Special\bin\Debug\Special.dll.config
 E:\my work\My Git dir\Special\Special\bin\Debug\Special.dll
 E:\my work\My Git dir\Special\Special\bin\Debug\Special.pdb
+E:\my work\My Git dir\SerializeLab\Special\Special\bin\Debug\Special.dll.config
+E:\my work\My Git dir\SerializeLab\Special\Special\bin\Debug\Special.dll
+E:\my work\My Git dir\SerializeLab\Special\Special\bin\Debug\Special.pdb
+E:\my work\My Git dir\SerializeLab\Special\Special\obj\Debug\SpecialAutoPlugin.csprojResolveAssemblyReference.cache
+E:\my work\My Git dir\SerializeLab\Special\Special\obj\Debug\Special.dll
+E:\my work\My Git dir\SerializeLab\Special\Special\obj\Debug\Special.pdb
