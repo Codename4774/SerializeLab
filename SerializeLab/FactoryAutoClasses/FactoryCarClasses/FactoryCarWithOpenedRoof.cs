@@ -45,8 +45,8 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }        
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
@@ -61,6 +61,10 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             CarWithOpenRoof currentCar = (CarWithOpenRoof)currentAuto;
             controlList[SystemOpeningRoofIndex].Text = Enum.GetName(typeof(CarWithOpenRoof.SystemOfOpeningRoof), currentCar.SystemOpeningRoof);
             controlList[KindRoofIndex].Text = Enum.GetName(typeof(CarWithOpenRoof.KindOfRoof), currentCar.KindRoof);
+        }
+        public FactoryCarWithOpenedRoof()
+        {
+            typeName = typeof(CarWithOpenRoof).Name;
         }
     }
 }

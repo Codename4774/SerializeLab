@@ -45,8 +45,8 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }
         }
 
@@ -62,6 +62,10 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorCar
             CarWithClosedRoof currentCar = (CarWithClosedRoof)currentAuto;
             controlList[KindHatchIndex].Text = Enum.GetName(typeof(CarWithClosedRoof.KindOfHatch), currentCar.KindHatch);
             controlList[SaloonVolumeIndex].Text = Convert.ToString(currentCar.SaloonVolume);
+        }
+        public FactoryCarWithClosedRoof()
+        {
+            typeName = typeof(CarWithClosedRoof).Name;
         }
     }
 }

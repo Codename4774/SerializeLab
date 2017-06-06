@@ -23,7 +23,7 @@ namespace SerializeLab.Classes
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("Invalid data");
                 }
             }
             get
@@ -44,7 +44,7 @@ namespace SerializeLab.Classes
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("Invalid data");
                 }
             }
             get
@@ -63,7 +63,7 @@ namespace SerializeLab.Classes
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("Invalid data");
                 }
             }
             get
@@ -73,7 +73,7 @@ namespace SerializeLab.Classes
         }
 
         private int classIndex;
-
+        
         public int ClassIndex
         {
             get
@@ -106,7 +106,7 @@ namespace SerializeLab.Classes
         }
         public virtual void SerializeObject(StreamWriter file, char separator)
         {
-            file.Write(this.ClassIndex);
+            file.Write(this.GetType().Name);
             file.Write(separator);
             file.Write(this.Weigth);
             file.Write(separator);
@@ -138,7 +138,7 @@ namespace SerializeLab.Classes
             }
             catch
             {
-                throw new Exception();
+                throw new Exception("Invalid data");
             }
         }
     }

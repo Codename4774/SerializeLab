@@ -40,8 +40,8 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
@@ -54,6 +54,10 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
 
             Truck currentTransport = (Truck)currentAuto;
             controlList[KindTrailerIndex].Text = Enum.GetName(typeof(Truck.KindOfTrailer), currentTransport.KindTrailer);
+        }
+        public FactoryTruck()
+        {
+            typeName = typeof(Truck).Name;
         }
     }
 }

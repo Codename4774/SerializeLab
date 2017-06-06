@@ -42,8 +42,8 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
@@ -56,6 +56,10 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorTransportAuto
 
             TrolleyBus currentTransport = (TrolleyBus)currentAuto;
             controlList[LengthOfRodsIndex].Text = Convert.ToString(currentTransport.LengthOfRods);
+        }
+        public FactoryTrolleyBus()
+        {
+            typeName = typeof(TrolleyBus).Name;
         }
     }
 }

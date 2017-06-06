@@ -7,3 +7,5 @@ E:\my work\My Git dir\SerializeLab\SerializeLab\obj\Debug\SerializeLab.Propertie
 E:\my work\My Git dir\SerializeLab\SerializeLab\obj\Debug\SerializeLab.csproj.GenerateResource.Cache
 E:\my work\My Git dir\SerializeLab\SerializeLab\obj\Debug\SerializeLab.exe
 E:\my work\My Git dir\SerializeLab\SerializeLab\obj\Debug\SerializeLab.pdb
+E:\my work\My Git dir\SerializeLab\SerializeLab\bin\Debug\AttributesAndCommonClasses.dll
+E:\my work\My Git dir\SerializeLab\SerializeLab\bin\Debug\AttributesAndCommonClasses.pdb

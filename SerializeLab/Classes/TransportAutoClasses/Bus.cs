@@ -41,7 +41,7 @@ namespace SerializeLab.Classes.TransportAutoClasses
             }
             catch
             {
-                throw new Exception();
+                throw new Exception("Invalid data");
             }
         }
 

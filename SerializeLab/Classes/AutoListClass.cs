@@ -7,18 +7,19 @@ using SerializeLab.Classes;
 using System.IO;
 using System.ComponentModel;
 using SerializeLab.FactoryFormEditor;
+using AttributesAndCommonClasses;
+using System.Text;
 
 namespace SerializeLab.Classes
 {
     public class AutoListClass
     {
-        private BindingList<Auto> autoList = new BindingList<Auto>();
-        public BindingList<Auto> AutoList { set; get; }
+        private List<dynamic> autoList = new List<dynamic>();
+        public List<dynamic> AutoList { set; get; }
 
         public AutoListClass()
         {
-            //autoList = new BindingList<Auto>();
-            AutoList = new BindingList<Auto>();
+            AutoList = new List<dynamic>();
         }
         
         private char separator = '|';
@@ -34,10 +35,32 @@ namespace SerializeLab.Classes
             file.Flush();
             file.Close();
         }
-
-        public void DeserializeList(string fileName, FactoryAutos factoryFormEditor)
+        public void SerializeList(string fileName, CommonClasses.DataProcessingDelegate dataProcessingEvent)
         {
-            const int ClassIndexPos = 0;
+
+            MemoryStream tempStream = new MemoryStream();
+            StreamWriter tempStreamWriter = new StreamWriter(tempStream);
+            for (int i = 0; i < AutoList.Count; i++)
+            {
+                AutoList[i].SerializeObject(tempStreamWriter, separator);
+            }
+            tempStreamWriter.Flush();
+            byte[] tempArray = tempStream.ToArray();
+
+            dataProcessingEvent.Invoke(ref tempArray);
+            tempStream = new MemoryStream(tempArray);
+            StreamWriter file = new StreamWriter(fileName, false);
+
+            tempStream.CopyTo(file.BaseStream);
+
+            file.Flush();
+            tempStream.Close();
+            tempStreamWriter.Close();
+            file.Close();
+        }
+        public void DeserializeList(string fileName, FactoryAutos factoryAutos)
+        {
+            const int classIndexPos = 0;
 
             StreamReader file = new StreamReader(fileName, System.Text.Encoding.Default);
 
@@ -50,12 +73,68 @@ namespace SerializeLab.Classes
 
             while (fileDataSeparated.Count != 0)
             {
-                int classIndex = Convert.ToInt32(fileDataSeparated[ClassIndexPos]);
 
-                fileDataSeparated.RemoveAt(ClassIndexPos);
-                Auto addedItem = factoryFormEditor.FactoryList[classIndex].GetDataObject(classIndex);
-                addedItem.DeserializeObject(fileDataSeparated);
-                AutoList.Add(addedItem);
+                int classIndex = factoryAutos.TypesInfo.IndexOf(fileDataSeparated[classIndexPos]);
+                if (classIndex < 0)
+                {
+                    string answ = "Unsupported member \"";
+                    answ = String.Concat(answ, fileDataSeparated[classIndexPos]);
+                    answ = String.Concat(answ, "\" for deserializing");
+
+                    throw new Exception(answ);
+                }
+                else
+                {
+                    fileDataSeparated.RemoveAt(classIndexPos);
+
+                    dynamic addedItem = factoryAutos.FactoryList[classIndex].GetDataObject(classIndex);
+                    addedItem.DeserializeObject(fileDataSeparated);
+                    AutoList.Add(addedItem);
+                }
+            }
+        }
+        public void DeserializeList(string fileName, FactoryAutos factoryAutos, CommonClasses.DataProcessingDelegate dataProcessingEvent)
+        {
+            const int classIndexPos = 0;
+
+            StreamReader file = new StreamReader(fileName);
+            MemoryStream tempStream = new MemoryStream();
+            file.BaseStream.Seek(0, SeekOrigin.Begin);
+
+            file.BaseStream.CopyTo(tempStream);
+
+            byte[] tempData = tempStream.ToArray();
+
+            dataProcessingEvent.Invoke(ref tempData);
+
+            string fileData = Encoding.Default.GetString(tempData);
+
+            file.Close();
+            tempStream.Close();
+
+            List<string> fileDataSeparated = fileData.Split(separator).ToList();
+            fileDataSeparated.RemoveAt(fileDataSeparated.Count - 1);
+
+            while (fileDataSeparated.Count != 0)
+            {
+
+                int classIndex = factoryAutos.TypesInfo.IndexOf(fileDataSeparated[classIndexPos]);
+                if (classIndex < 0)
+                {
+                    string answ = "Unsupported member \"";
+                    answ = String.Concat(answ, fileDataSeparated[classIndexPos]);
+                    answ = String.Concat(answ, "\" for deserializing");
+
+                    throw new Exception(answ);
+                }
+                else
+                {
+                    fileDataSeparated.RemoveAt(classIndexPos);
+
+                    dynamic addedItem = factoryAutos.FactoryList[classIndex].GetDataObject(classIndex);
+                    addedItem.DeserializeObject(fileDataSeparated);
+                    AutoList.Add(addedItem);
+                }
             }
         }
 

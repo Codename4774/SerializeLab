@@ -42,7 +42,7 @@ namespace SerializeLab.Classes.FreightTransportClasses
             }
             catch
             {
-                throw new Exception();
+                throw new Exception("Invalid data");
             }
         }
     }

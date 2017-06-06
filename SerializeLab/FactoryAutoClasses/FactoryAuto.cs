@@ -32,7 +32,18 @@ namespace SerializeLab.FactoryFormEditor
                 e.Handled = true;
             }
         }
-
+        protected string typeName;
+        public string TypeName
+        {
+            get
+            {
+                return typeName;
+            }
+            private set
+            {
+ 
+            }
+        }
         public TextBox GetTextBox(string name, Size size, Point location, int tabIndex, KeyPressEventHandler eventKeyPress)
         {
             TextBox result = new TextBox();
@@ -135,8 +146,8 @@ namespace SerializeLab.FactoryFormEditor
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }
         }
         public virtual void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)

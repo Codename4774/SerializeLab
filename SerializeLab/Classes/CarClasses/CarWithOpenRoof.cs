@@ -51,7 +51,7 @@ namespace SerializeLab.Classes.CarClasses
             }
             catch
             {
-                throw new Exception();
+                throw new Exception("Invalid data");
             }
         }
     }

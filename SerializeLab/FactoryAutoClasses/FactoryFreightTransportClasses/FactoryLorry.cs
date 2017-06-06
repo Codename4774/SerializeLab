@@ -46,8 +46,8 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
             }
             catch
             {
-                MessageBox.Show("Incorrect data. Please, try again.");
-                throw new Exception();
+                //MessageBox.Show("Incorrect data. Please, try again.");
+                throw new Exception("Invalid data");
             }
         }
         public override void AddAttribsToControls(Auto currentAuto, Control.ControlCollection controls)
@@ -62,6 +62,10 @@ namespace SerializeLab.FactoryFormEditor.FactoryFormEditorFreightTransport
             Lorry currentTransport = (Lorry)currentAuto;
             controlList[KindTrunkIndex].Text = Enum.GetName(typeof(Lorry.KindOfTrunk), currentTransport.KindTrunk);
             controlList[SystemOfTrunkIndex].Text = Enum.GetName(typeof(Lorry.FixedOrLiftedTrunk), currentTransport.SystemOfTrunk);
+        }
+        public FactoryLorry()
+        {
+            typeName = typeof(Lorry).Name;
         }
     }
 }
