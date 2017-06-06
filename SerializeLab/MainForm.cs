@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SerializeLab.Classes;
 using SerializeLab.FactoryFormEditor;
+using AttributesAndCommonClasses;
 
 namespace SerializeLab
 {
     public partial class MainForm : Form
     {
         AutoListClass list = new AutoListClass();
+        public CommonClasses.DataProcessingDelegate cipherEvent;
+        public CommonClasses.DataProcessingDelegate decipherEvent;
         public MainForm()
         {
             InitializeComponent();
@@ -29,15 +32,24 @@ namespace SerializeLab
                 ComboBoxInput.Items.Add(currFactory.TypeName);
             }
             ComboBoxInput.SelectedIndex = 0;
+            functionalPlugin = null;
         }
 
         private static AppInitializator appInitializator = new AppInitializator();
         private FactoryAutos factoryAutos = appInitializator.MakeFactoryAutos(appInitializator.GetPlugins());
+        private object functionalPlugin;
         private void serializeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (SaveSerializeFileDialog.ShowDialog() != DialogResult.Cancel)
             {
-                list.SerializeList(SaveSerializeFileDialog.FileName);
+                if (functionalPlugin == null)
+                {
+                    list.SerializeList(SaveSerializeFileDialog.FileName);
+                }
+                else
+                {
+                    list.SerializeList(SaveSerializeFileDialog.FileName, cipherEvent);
+                }
             }
         }
 
@@ -103,7 +115,14 @@ namespace SerializeLab
             {
                 try
                 {
-                    list.DeserializeList(OpenSerializeFileDialog.FileName, factoryAutos);
+                    if (functionalPlugin == null)
+                    {
+                        list.DeserializeList(OpenSerializeFileDialog.FileName, factoryAutos);
+                    }
+                    else
+                    {
+                        list.DeserializeList(OpenSerializeFileDialog.FileName, factoryAutos, decipherEvent);
+                    }
                 }
                 catch(Exception exeption)
                 {
@@ -150,6 +169,21 @@ namespace SerializeLab
                 ListBoxAutos.Items.Clear();
                 PanelEditing.Controls.Clear();
                 LabelTypeEditedAuto.Text = "";
+            }
+        }
+
+        private void addPluginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (addPluginDialog.ShowDialog() != DialogResult.Cancel)
+            {
+                try
+                {
+                    functionalPlugin = appInitializator.CreateFunctionalClass(appInitializator.GetFunctionalPlugin(addPluginDialog.FileName), this);
+                }
+                catch(Exception exception)
+                {
+                    MessageBox.Show(exception.ToString());
+                }
             }
         }
     }

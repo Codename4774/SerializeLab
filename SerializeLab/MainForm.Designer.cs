@@ -32,6 +32,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deserializeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addPluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ListBoxAutos = new System.Windows.Forms.ListBox();
             this.ButtonAdd = new System.Windows.Forms.Button();
             this.ButtonDelete = new System.Windows.Forms.Button();
@@ -43,13 +44,15 @@
             this.SaveSerializeFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.LabelTypeEditedAuto = new System.Windows.Forms.Label();
             this.ButtonDeleteAll = new System.Windows.Forms.Button();
+            this.addPluginDialog = new System.Windows.Forms.OpenFileDialog();
             this.MenuMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuMain
             // 
             this.MenuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.addPluginToolStripMenuItem});
             this.MenuMain.Location = new System.Drawing.Point(0, 0);
             this.MenuMain.Name = "MenuMain";
             this.MenuMain.Size = new System.Drawing.Size(748, 24);
@@ -79,6 +82,13 @@
             this.deserializeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.deserializeToolStripMenuItem.Text = "Deserialize";
             this.deserializeToolStripMenuItem.Click += new System.EventHandler(this.deserializeToolStripMenuItem_Click);
+            // 
+            // addPluginToolStripMenuItem
+            // 
+            this.addPluginToolStripMenuItem.Name = "addPluginToolStripMenuItem";
+            this.addPluginToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.addPluginToolStripMenuItem.Text = "Add plugin";
+            this.addPluginToolStripMenuItem.Click += new System.EventHandler(this.addPluginToolStripMenuItem_Click);
             // 
             // ListBoxAutos
             // 
@@ -178,6 +188,10 @@
             this.ButtonDeleteAll.UseVisualStyleBackColor = true;
             this.ButtonDeleteAll.Click += new System.EventHandler(this.ButtonDeleteAll_Click);
             // 
+            // addPluginDialog
+            // 
+            this.addPluginDialog.Filter = "DLL files(*.dll)|*.dll";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,6 +235,8 @@
         private System.Windows.Forms.SaveFileDialog SaveSerializeFileDialog;
         private System.Windows.Forms.Label LabelTypeEditedAuto;
         private System.Windows.Forms.Button ButtonDeleteAll;
+        private System.Windows.Forms.ToolStripMenuItem addPluginToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog addPluginDialog;
     }
 }
 
